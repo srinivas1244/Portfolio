@@ -4,209 +4,593 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perala Srinivasulu — Portfolio</title>
+  <meta name="description"
+    content="Perala Srinivasulu — Full-stack developer in Hyderabad. B.Tech CSE (KLH), React, Node.js, Python. Portfolio, projects, and contact.">
+  <meta name="theme-color" content="#0D0C0A">
+  <link rel="canonical" href="https://srinivas1244.github.io/MY-portfolio/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Perala Srinivasulu — Portfolio">
+  <meta property="og:description"
+    content="Full-stack developer in Hyderabad. B.Tech CSE, React, Node.js, and modern web apps.">
+  <meta property="og:url" content="https://srinivas1244.github.io/MY-portfolio/">
+  <meta property="og:locale" content="en_IN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Perala Srinivasulu — Portfolio">
+  <meta name="twitter:description"
+    content="Full-stack developer in Hyderabad. B.Tech CSE, React, Node.js, and modern web apps.">
+  <meta property="og:image" content="https://srinivas1244.github.io/MY-portfolio/profile.jpg">
+  <meta name="twitter:image" content="https://srinivas1244.github.io/MY-portfolio/profile.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- ── Single merged Google Fonts link (Lobster + Playfair + DM Serif + Cormorant + Inter + JetBrains + Outfit) ── -->
+
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
-  <title>Perala Srinivasulu Portfolio</title>
-  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-  <link rel="stylesheet" href="style.css">
-  <style>
-    /* Smooth scrolling */
-    html {
-      scroll-behavior: smooth;
-    }
-    /* Section Styling */
-    section {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 80px 10%;
-    }
-
-
-    .about .content, .skills .content {
-      max-width: 900px;
-      text-align: center;
-    }
-
-    .about h2, .skills h2 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      color: #333;
-    }
-
-    .about p, .skills p {
-      font-size: 1.1rem;
-      color: #555;
-      line-height: 1.6;
-    }
-
-    .skills-list {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-    }
-
-    .skill-box {
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      padding: 20px 30px;
-      font-weight: 600;
-      color: #333;
-      transition: 0.3s ease;
-    }
-
-    .skill-box:hover {
-      transform: translateY(-5px);
-    }
-  </style>
+  <link rel="stylesheet" href="style.css?v=29">
+  <link rel="stylesheet" href="3d-effects.css?v=29">
 </head>
 
 <body>
-  <nav>
-    <div class="nav-container">
-      <div class="logo" data-aos="zoom-in" data-aos-duration="1000">
-        <span>Perala Srinivasulu</span>
+
+  <!-- ═══ LOADING SCREEN ═══ -->
+  <div id="loader" class="loader">
+    <div class="loader-inner">
+      <div class="loader-logo">PS<span class="dot">.</span></div>
+      <div class="loader-bar">
+        <div class="loader-fill"></div>
       </div>
-      <div class="links">
-        <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100"><a href="#home">Home</a></div>
-        <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200"><a href="#about">About</a></div>
-        <div class="link" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300"><a href="#skills">Skills</a></div>
-        <div class="link contact-btn" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600"><a href="#contact">Contact Us</a></div>
-      </div>
-      <i class="fa-solid fa-bars hamburg" onclick="hamburg()"></i>
+      <p class="loader-text">Loading experience…</p>
     </div>
-    <div class="dropdown">
-      <div class="links">
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#contact">Contact Us</a>
-        <i class="fa-solid fa-xmark cancel" onclick="cancel()"></i>
+  </div>
+
+  <!-- ═══ 3D STACKED TYPOGRAPHY BACKGROUND ═══ -->
+  <div class="perspective-container">
+    <div class="stacked-text-bg">
+      <div class="stacked-word outline">CREATIVE</div>
+      <div class="stacked-word outline">DESIGNER</div>
+      <div class="stacked-word solid">DEVELOPER</div>
+    </div>
+  </div>
+
+  <style>
+    .perspective-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      perspective: 1200px;
+      z-index: -2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      pointer-events: none;
+    }
+
+    .stacked-text-bg {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      opacity: 0.2;
+      transform-style: preserve-3d;
+      transform: rotateX(25deg) rotateY(-15deg) translateZ(-200px);
+      will-change: transform;
+    }
+
+    .stacked-word {
+      font-family: 'Outfit', sans-serif;
+      font-size: 18vw;
+      font-weight: 800;
+      line-height: 0.75;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      margin: 0;
+      padding: 0;
+      white-space: nowrap;
+      transform: scaleY(1.2);
+    }
+
+    .stacked-word.outline {
+      color: transparent;
+      -webkit-text-stroke: 2px #ffffff;
+    }
+
+    .stacked-word.solid {
+      color: #ffffff;
+      -webkit-text-stroke: none;
+    }
+  </style>
+
+  <!-- Custom Cursor -->
+  <div class="cursor"></div>
+  <div class="cursor-follower"></div>
+
+  <!-- Noise Overlay -->
+  <div class="noise"></div>
+
+  <!-- Navigation -->
+  <nav id="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <span class="logo-text">PS<span class="dot">.</span></span>
       </div>
+      <div class="nav-links">
+        <a href="#home" class="nav-link">Home</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#education" class="nav-link">Education</a>
+        <a href="#contact" class="nav-link contact-btn">Contact</a>
+      </div>
+      <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#home" onclick="closeMenu()">Home</a>
+      <a href="#about" onclick="closeMenu()">About</a>
+      <a href="#skills" onclick="closeMenu()">Skills</a>
+      <a href="#projects" onclick="closeMenu()">Projects</a>
+      <a href="#education" onclick="closeMenu()">Education</a>
+      <a href="#contact" onclick="closeMenu()">Contact</a>
     </div>
   </nav>
 
-  <!-- Home Section -->
-  <section id="home">
-    <div class="main-container">
-      <div class="image" data-aos="zoom-in-right" data-aos-duration="2500">
-        <img src="pp pic.jpg" alt="">
+  <!-- ═══ MAIN CONTENT ═══ -->
+  <main id="smoothContent">
+
+    <!-- ═══ HERO SECTION ═══ -->
+    <section id="home" class="hero" data-scroll-speed="0.3">
+      <div class="hero-bg-text" data-scroll-speed="0.6">DEVELOPER</div>
+      <div class="hero-container">
+        <div class="hero-content">
+          <p class="hero-greeting anim-item">Hello, World! 👋</p>
+          <h1 class="hero-title">
+            <span class="line anim-item">I'm <em>Perala</em></span>
+            <span class="line anim-item">Srinivasulu</span>
+          </h1>
+          <div class="typewriter-wrap anim-item">
+            <span class="static-text">Full-Stack </span>
+            <span class="dynamic-text"></span>
+            <span class="cursor-blink">|</span>
+          </div>
+          <p class="hero-tagline anim-item">B.Tech CSE (KLH) · Hyderabad · React, Node &amp; vanilla JS builds</p>
+          <p class="hero-desc anim-item">
+            I ship responsive interfaces and full-stack features—clean structure, accessible markup,
+            and performance that holds up in the real world.
+          </p>
+          <div class="hero-actions anim-item">
+            <a href="#contact" class="btn-primary magnetic-btn">Let's Connect <i
+                class="fa-solid fa-arrow-right"></i></a>
+          </div>
+          <div class="social-row anim-item">
+            <a href="https://github.com/srinivas1244" class="social-icon magnetic-btn" aria-label="GitHub">
+              <i class="fa-brands fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/perala-srinivasulu-068184315/" class="social-icon magnetic-btn"
+              aria-label="LinkedIn">
+              <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="image-frame tilt-card">
+            <div class="frame-deco frame-deco-1"></div>
+            <div class="frame-deco frame-deco-2"></div>
+            <img src="profile.jpg" alt="Perala Srinivasulu" class="hero-img"
+              onerror="if(!this.dataset.fallback){this.dataset.fallback='1';this.src='pp pic.jpg';} else {this.style.display='none'; this.parentNode.classList.add('no-image');}">
+            <div class="img-placeholder"><span>PS</span></div>
+            <div class="image-glow"></div>
+          </div>
+          <div class="floating-badge badge-1 magnetic-btn">
+            <i class="fa-solid fa-code"></i>
+            <span>Full-Stack Dev</span>
+          </div>
+          <div class="floating-badge badge-2 magnetic-btn">
+            <i class="fa-solid fa-star"></i>
+            <span>4+ Projects</span>
+          </div>
+        </div>
       </div>
-      <div class="content">
-        <h1 data-aos="fade-left" data-aos-duration="1000" data-aos-delay="800">Hey I'm <span>Perala Srinivasulu</span></h1>
-        <div class="typewriter" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="900">I'm a
-          <span></span></div>
-        <p data-aos="flip-up" data-aos-duration="1000" data-aos-delay="1000">
-          Perala Srinivasulu is a passionate web developer with a strong background in software development and design. He has a keen eye for detail and a talent for creating visually appealing and user-friendly interfaces. With a solid foundation in programming languages and frameworks, he is able to bring his ideas to life and create engaging and interactive web experiences.
+      <div class="scroll-indicator">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- ═══ ABOUT SECTION ═══ -->
+    <section id="about" class="about">
+      <div class="section-container">
+        <div class="section-label anim-item">— About Me</div>
+        <div class="about-grid">
+          <div class="about-left">
+            <h2 class="section-title anim-item">Passionate about <em>building</em> the web</h2>
+            <p class="about-text anim-item">
+              Hello! I'm <strong>Perala Srinivasulu</strong>, a full-stack developer focused on the
+              JavaScript ecosystem (React, Node) plus Python and Java for coursework and APIs.
+              I care about layout that scales, forms that work, and code another engineer can follow.
+            </p>
+            <p class="about-text anim-item">
+              Outside class I build portfolio pieces and small apps to learn deployment, accessibility,
+              and performance. I am always iterating—reviews, refactors, and shipping to GitHub.
+            </p>
+            <div class="about-stats">
+              <div class="stat anim-item">
+                <span class="stat-num" data-target="10">0</span><span class="stat-plus">+</span>
+                <p>Technologies</p>
+              </div>
+              <div class="stat anim-item">
+                <span class="stat-num" data-target="4">0</span><span class="stat-plus">+</span>
+                <p>Projects Done</p>
+              </div>
+              <div class="stat anim-item">
+                <span class="stat-num" data-target="3">0</span><span class="stat-plus">+</span>
+                <p>Certifications</p>
+              </div>
+            </div>
+            <div class="certs-inline anim-item">
+              <h4 class="certs-heading">Credentials &amp; learning</h4>
+              <ul class="certs-list">
+                <li>University coursework: data structures, software engineering, web technologies</li>
+                <li>Self-paced tracks in modern JavaScript, React, and REST APIs</li>
+                <li>Regular practice on coding platforms and hackathon-style builds</li>
+              </ul>
+            </div>
+          </div>
+          <div class="about-right">
+            <div class="about-card-grid">
+              <div class="about-card tilt-card anim-item">
+                <i class="fa-solid fa-laptop-code"></i>
+                <h4>Clean Code</h4>
+                <p>Writing maintainable, scalable solutions</p>
+              </div>
+              <div class="about-card tilt-card anim-item">
+                <i class="fa-solid fa-palette"></i>
+                <h4>UI/UX Design</h4>
+                <p>Pixel-perfect, user-first interfaces</p>
+              </div>
+              <div class="about-card tilt-card anim-item">
+                <i class="fa-solid fa-bolt"></i>
+                <h4>Performance</h4>
+                <p>Fast, optimized, seamless experiences</p>
+              </div>
+              <div class="about-card tilt-card anim-item">
+                <i class="fa-solid fa-mobile-screen"></i>
+                <h4>Responsive</h4>
+                <p>Flawless on every device &amp; screen</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ SKILLS SECTION ═══ -->
+    <section id="skills" class="skills">
+      <div class="section-container">
+        <div class="section-label anim-item">— Technical Arsenal</div>
+        <h2 class="section-title anim-item">Skills &amp; <em>Technologies</em></h2>
+        <p class="section-subtitle anim-item">Technologies I work with day-to-day to build exceptional products</p>
+
+        <div class="skills-wrapper">
+          <div class="skill-category tilt-card anim-item">
+            <div class="category-header">
+              <span class="category-num">01</span>
+              <h3>Frontend</h3>
+            </div>
+            <div class="skill-tags">
+              <div class="skill-tag"><i class="fa-brands fa-html5"></i><span>HTML5</span></div>
+              <div class="skill-tag"><i class="fa-brands fa-css3-alt"></i><span>CSS3</span></div>
+              <div class="skill-tag"><i class="fa-brands fa-js"></i><span>JavaScript</span></div>
+              <div class="skill-tag"><i class="fa-brands fa-react"></i><span>React.js</span></div>
+            </div>
+          </div>
+
+          <div class="skill-category tilt-card anim-item">
+            <div class="category-header">
+              <span class="category-num">02</span>
+              <h3>Backend &amp; Languages</h3>
+            </div>
+            <div class="skill-tags">
+              <div class="skill-tag"><i class="fa-brands fa-python"></i><span>Python</span></div>
+              <div class="skill-tag"><i class="fa-brands fa-java"></i><span>Java</span></div>
+              <div class="skill-tag"><i class="fa-brands fa-node-js"></i><span>Node.js</span></div>
+            </div>
+          </div>
+
+          <div class="skill-category tilt-card anim-item">
+            <div class="category-header">
+              <span class="category-num">03</span>
+              <h3>Databases</h3>
+            </div>
+            <div class="skill-tags">
+              <div class="skill-tag"><i class="fa-solid fa-database"></i><span>MySQL</span></div>
+              <div class="skill-tag"><i class="fa-solid fa-leaf"></i><span>MongoDB</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ PROJECTS SECTION ═══ -->
+    <section id="projects" class="projects">
+      <div class="section-container">
+        <div class="section-label anim-item">— Selected Work</div>
+        <h2 class="section-title anim-item">Projects &amp; <em>Builds</em></h2>
+        <p class="section-subtitle anim-item">Live demos and source—swap links below as you ship more work.</p>
+
+        <div class="projects-grid">
+          <article class="project-card tilt-card anim-item">
+            <div class="project-card-top">
+              <span class="project-icon" aria-hidden="true"><i class="fa-solid fa-layer-group"></i></span>
+              <div class="project-tags">
+                <span>HTML</span><span>CSS</span><span>JavaScript</span>
+              </div>
+            </div>
+            <h3 class="project-title">Personal portfolio</h3>
+            <p class="project-desc">This site: responsive layout, custom interactions, and a real contact pipeline.</p>
+            <div class="project-links">
+              <a href="#home" class="project-link project-link-primary">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i> Live
+              </a>
+              <a href="https://github.com/srinivas1244/MY-portfolio" class="project-link" target="_blank"
+                rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Source</a>
+            </div>
+          </article>
+
+          <article class="project-card tilt-card anim-item">
+            <div class="project-card-top">
+              <span class="project-icon" aria-hidden="true"><i class="fa-solid fa-code"></i></span>
+              <div class="project-tags">
+                <span>React</span><span>JavaScript</span><span>UI</span>
+              </div>
+            </div>
+            <h3 class="project-title">Frontend UI kit</h3>
+            <p class="project-desc">Reusable components, responsive grids, and accessible patterns—link your deployed
+              demo when ready.</p>
+            <div class="project-links">
+              <a href="https://github.com/srinivas1244?tab=repositories" class="project-link project-link-primary"
+                target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Repositories</a>
+              <a href="https://github.com/srinivas1244" class="project-link" target="_blank"
+                rel="noopener noreferrer"><i class="fa-solid fa-user"></i> Profile</a>
+            </div>
+          </article>
+
+          <article class="project-card tilt-card anim-item">
+            <div class="project-card-top">
+              <span class="project-icon" aria-hidden="true"><i class="fa-solid fa-server"></i></span>
+              <div class="project-tags">
+                <span>Node.js</span><span>API</span><span>MongoDB</span>
+              </div>
+            </div>
+            <h3 class="project-title">REST API service</h3>
+            <p class="project-desc">CRUD routes, validation, and persistence—point the first link to your hosted API or
+              Swagger when live.</p>
+            <div class="project-links">
+              <a href="https://github.com/srinivas1244?tab=repositories" class="project-link project-link-primary"
+                target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Find repo</a>
+              <a href="#contact" class="project-link"><i class="fa-solid fa-envelope"></i> Discuss</a>
+            </div>
+          </article>
+
+          <article class="project-card tilt-card anim-item">
+            <div class="project-card-top">
+              <span class="project-icon" aria-hidden="true"><i class="fa-solid fa-bolt"></i></span>
+              <div class="project-tags">
+                <span>Python</span><span>Java</span><span>DSA</span>
+              </div>
+            </div>
+            <h3 class="project-title">Labs &amp; coursework</h3>
+            <p class="project-desc">Algorithms, OOP, and small utilities from university modules—publish your best repos
+              here.</p>
+            <div class="project-links">
+              <a href="https://github.com/srinivas1244" class="project-link project-link-primary" target="_blank"
+                rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
+              <a href="#contact" class="project-link"><i class="fa-solid fa-envelope"></i> Ask me</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ EDUCATION SECTION ═══ -->
+    <section id="education" class="education">
+      <div class="section-container">
+        <h2 class="section-title anim-item">Education &amp; <em>Learning</em></h2>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2024 – 2028</div>
+            <div class="timeline-card tilt-card">
+              <div class="timeline-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+              <h3>KLH University, Hyderabad</h3>
+              <p class="timeline-role">B.Tech — Computer Science &amp; Engineering</p>
+              <p class="timeline-desc">Developed a strong foundation in algorithms, data structures, software
+                engineering, and web technologies. Actively participated in coding competitions and project hackathons.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2022 – 2024</div>
+            <div class="timeline-card tilt-card">
+              <div class="timeline-icon"><i class="fa-solid fa-school"></i></div>
+              <h3>Page Junior College, Hyderabad</h3>
+              <p class="timeline-role">Intermediate (MPC)</p>
+              <p class="timeline-desc">MPC stream with intensive problem-solving for engineering entrance readiness;
+                strengthened calculus, mechanics, and first serious programming exposure alongside peer competitions.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2019 – 2021</div>
+            <div class="timeline-card tilt-card">
+              <div class="timeline-icon"><i class="fa-solid fa-school"></i></div>
+              <h3>Sri Chaitanya School</h3>
+              <p class="timeline-role">Secondary school</p>
+              <p class="timeline-desc">Foundation years emphasizing STEM habits, board-aligned science and math, and
+                early analytical thinking that later fed into intermediate science and engineering prep.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ CONTACT SECTION ═══ -->
+    <section id="contact" class="contact">
+      <div class="section-container">
+
+        <div class="section-label anim-item">— Get In Touch</div>
+
+        <h2 class="section-title anim-item">
+          Let's Build Something <em>Together</em>
+        </h2>
+
+        <p class="section-subtitle anim-item">
+          Open for collaborations, internships, freelance work, and creative tech projects.
         </p>
-        <div class="social-links" data-aos="flip-down" data-aos-duration="1000" data-aos-delay="1200">
-          <a href="#"><i class="fa-brands fa-github"></i></a>
-          <a href="#"><i class="fa-brands fa-facebook"></i></a>
-          <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-          <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
-        </div>
-        <div class="btn" data-aos="zoom-out-left" data-aos-duration="1000" data-aos-delay="1300">
-          <button>Download CV</button>
+
+        <div class="contact-cards">
+
+          <!-- EMAIL -->
+          <a href="mailto:srinivasuluperala2006@gmail.com" class="contact-card tilt-card anim-item">
+
+            <div class="contact-glow"></div>
+
+            <div class="contact-top">
+              <div class="contact-card-icon">
+                <i class="fa-solid fa-envelope"></i>
+              </div>
+
+              <div class="contact-arrow">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </div>
+            </div>
+
+            <div class="contact-content">
+              <h3>Email</h3>
+
+              <p>
+                Reach out for collaborations, freelance opportunities, or project discussions.
+              </p>
+
+              <span>
+                srinivasuluperala2006@gmail.com
+              </span>
+            </div>
+          </a>
+
+          <!-- LINKEDIN -->
+          <a href="https://www.linkedin.com/in/perala-srinivasulu-068184315/" target="_blank"
+            class="contact-card tilt-card anim-item">
+
+            <div class="contact-glow"></div>
+
+            <div class="contact-top">
+              <div class="contact-card-icon">
+                <i class="fa-brands fa-linkedin-in"></i>
+              </div>
+
+              <div class="contact-arrow">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </div>
+            </div>
+
+            <div class="contact-content">
+              <h3>LinkedIn</h3>
+
+              <p>
+                Connect professionally and follow my development journey.
+              </p>
+
+              <span>
+                linkedin.com/in/perala-srinivasulu
+              </span>
+            </div>
+          </a>
+
+          <!-- GITHUB -->
+          <a href="https://github.com/srinivas1244" target="_blank" class="contact-card tilt-card anim-item">
+
+            <div class="contact-glow"></div>
+
+            <div class="contact-top">
+              <div class="contact-card-icon">
+                <i class="fa-brands fa-github"></i>
+              </div>
+
+              <div class="contact-arrow">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </div>
+            </div>
+
+            <div class="contact-content">
+              <h3>GitHub</h3>
+
+              <p>
+                Explore my repositories, experiments, and full-stack projects.
+              </p>
+
+              <span>
+                github.com/srinivas1244
+              </span>
+            </div>
+          </a>
+
+          <!-- LOCATION -->
+          <div class="contact-card tilt-card anim-item">
+
+            <div class="contact-glow"></div>
+
+            <div class="contact-top">
+              <div class="contact-card-icon">
+                <i class="fa-solid fa-location-dot"></i>
+              </div>
+            </div>
+
+            <div class="contact-content">
+              <h3>Location</h3>
+
+              <p>
+                Based in Hyderabad, India and available for remote collaboration worldwide.
+              </p>
+
+              <span>
+                Hyderabad, India
+              </span>
+            </div>
+          </div>
+
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- About Section -->
-  <section id="about" class="about">
-    <div class="content" data-aos="fade-up" data-aos-duration="1000">
-      <h2>About Me</h2>
-      <p>Hello! I’m Perala Srinivasulu, a full-stack web developer dedicated to building interactive, efficient, and visually appealing websites. I’m passionate about crafting clean user interfaces and smooth digital experiences using modern web technologies. I love learning, experimenting, and pushing the boundaries of what’s possible on the web.</p>
-    </div>
-  </section>
-
-  <!-- Skills Section -->
-  <section id="skills" class="skills">
-    <div class="content" data-aos="fade-up" data-aos-duration="1000">
-      <h2>Technical Skills</h2>
-      <p>Here are some of the technologies and tools I work with:</p>
-
-      <div class="skills-categories">
-        <!-- Frontend -->
-        <div class="category" data-aos="fade-up" data-aos-delay="100">
-          <h3>Frontend</h3>
-          <div class="skills-list">
-            <div class="skill-box"><i class="fa-brands fa-html5"></i> HTML5</div>
-            <div class="skill-box"><i class="fa-brands fa-css3-alt"></i> CSS3</div>
-            <div class="skill-box"><i class="fa-brands fa-js"></i> JavaScript</div>
-            <div class="skill-box"><i class="fa-brands fa-react"></i> React.js</div>
-          </div>
-        </div>
-
-        <!-- Backend -->
-        <div class="category" data-aos="fade-up" data-aos-delay="200">
-          <h3>Backend & Languages</h3>
-          <div class="skills-list">
-            <div class="skill-box"><i class="fa-brands fa-python"></i> Python</div>
-            <div class="skill-box"><i class="fa-brands fa-java"></i> Java</div>
-            <div class="skill-box"><i class="fa-brands fa-node"></i> Node.js</div>
-          </div>
-        </div>
-
-        <!-- Databases -->
-        <div class="category" data-aos="fade-up" data-aos-delay="300">
-          <h3>Databases</h3>
-          <div class="skills-list">
-            <div class="skill-box"><i class="fa-solid fa-database"></i> MySQL</div>
-            <div class="skill-box"><i class="fa-solid fa-database"></i> MongoDB</div>
-          </div>
-        </div>
+    <!-- ═══ FOOTER ═══ -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-logo">PS<span class="dot">.</span></div>
+        <p>Developed by Perala Srinivasulu</p>
+        <p class="footer-copy">&copy; 2026 All rights reserved.</p>
       </div>
-    </div>
-  </section>
+    </footer>
 
-  <!-- Education Section -->
-  <section id="education" class="education">
-    <div class="content" data-aos="fade-up" data-aos-duration="1000">
-      <h2>Education</h2>
-      <div class="edu-list">
-        <div class="edu-item" data-aos="zoom-in" data-aos-delay="100">
-          <h3>KLH University, Hyderabad</h3>
-          <p>B.Tech in Computer Science and Engineering (2021 - 2025)</p>
-        </div>
-        <div class="edu-item" data-aos="zoom-in" data-aos-delay="200">
-          <h3>Sri Chaitanya School</h3>
-          <p>Higher Secondary Education (2019 - 2021)</p>
-        </div>
-        <div class="edu-item" data-aos="zoom-in" data-aos-delay="300">
-          <h3>Coursera Certifications</h3>
-          <p>Completed multiple online courses in Web Development and Programming.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  </main>
 
-  <!-- Contact Section -->
-  <section id="contact" class="about">
-    <div class="content" data-aos="fade-up" data-aos-duration="1000">
-      <h2>Contact Me</h2>
-      <p>Let’s build something amazing together! You can reach me at:</p>
-      <p><strong>Email:</strong> srinivasuluperala2006@gmail.com</p>
-      <p><strong>LinkedIn:</strong> <a href="#">linkedin.com/in/srinivasulu</a></p>
-    </div>
-  </section>
-
-  <!-- Scripts -->
-  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-  <script>
-    AOS.init({ offset: 0 });
-  </script>
-  <script>
-    function hamburg() {
-      const navbar = document.querySelector(".dropdown");
-      navbar.style.transform = "translateY(0px)";
-    }
-    function cancel() {
-      const navbar = document.querySelector(".dropdown");
-      navbar.style.transform = "translateY(-500px)";
-    }
-  </script>
+  <!-- Three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <!-- Lenis smooth scroll -->
+  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="script.js?v=29"></script>
+  <script src="3d-effects.js?v=29"></script>
 </body>
+
 </html>
