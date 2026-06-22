@@ -18,6 +18,10 @@ const channels = [
   { icon: MapPin, label: "Location", value: profile.location, href: undefined },
 ];
 
+// Set NEXT_PUBLIC_FORMSPREE_ID (e.g. "xpzgabcd") to deliver messages straight to
+// your inbox via Formspree. Without it, the form falls back to the visitor's email app.
+const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID;
+
 export function Contact() {
   const [status, setStatus] = useState<Status>("idle");
   const [form, setForm] = useState({ name: "", email: "", message: "", company: "" });
@@ -25,33 +29,44 @@ export function Contact() {
   const update = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setForm((f) => ({ ...f, [k]: e.target.value }));
 
+  function openMailFallback() {
+    const subject = encodeURIComponent(`Portfolio enquiry${form.name ? ` from ${form.name}` : ""}`);
+    const body = encodeURIComponent(`${form.message}\n\n— ${form.name}${form.email ? ` (${form.email})` : ""}`);
+    window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`;
+    toast.success("Opening your email app…", {
+      description: `Finish sending there, or write to ${profile.email}`,
+    });
+  }
+
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (form.company) return; // honeypot — ignore bots
     setStatus("sending");
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
-      const data = await res.json();
-      if (!res.ok || !data.ok) throw new Error(data.error ?? "Something went wrong.");
-      toast.success("Message sent!", {
-        description: "Thanks for reaching out — I'll get back to you soon.",
-      });
-      setForm({ name: "", email: "", message: "", company: "" });
-    } catch (err) {
-      const message = err instanceof Error ? err.message : "Something went wrong.";
-      toast.error("Failed to send message", {
-        description: message,
-        action: {
-          label: "Email me directly",
-          onClick: () => window.open(profile.socials.email),
-        },
-      });
-    } finally {
-      setStatus("idle");
+
+    // Preferred path: Formspree delivers to the inbox without a backend.
+    if (FORMSPREE_ID) {
+      try {
+        const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({ name: form.name, email: form.email, message: form.message }),
+        });
+        if (res.ok) {
+          toast.success("Message sent!", {
+            description: "Thanks for reaching out — I'll get back to you soon.",
+          });
+          setForm({ name: "", email: "", message: "", company: "" });
+          setStatus("idle");
+          return;
+        }
+      } catch {
+        /* network issue — fall through to the email-client fallback */
+      }
     }
+
+    // Fallback: open the visitor's email client pre-filled.
+    openMailFallback();
+    setStatus("idle");
   }
 
   return (

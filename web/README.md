@@ -63,15 +63,17 @@ Requires Node 20.9+.
 
 ## ⚙️ Environment variables
 
-Create `web/.env.local` (all optional):
+Copy `web/.env.example` → `web/.env.local` for local dev, and set the same vars in
+Netlify (**Site settings → Environment variables**). All are optional:
 
 ```bash
-# Canonical site URL (used for metadata, OG, sitemap)
-NEXT_PUBLIC_SITE_URL=https://your-domain.com
+# Canonical site URL — metadata, OG, sitemap, JSON-LD
+NEXT_PUBLIC_SITE_URL=https://perala-srinivasulu.netlify.app
 
-# Optional: forward contact-form messages to a webhook (Discord/Slack/Make/Zapier).
-# Without it, the form still succeeds gracefully.
-CONTACT_WEBHOOK_URL=https://discord.com/api/webhooks/xxx/yyy
+# Formspree form ID — delivers contact-form messages to your inbox.
+# Create a free form at https://formspree.io and paste the ID (the part after /f/).
+# If empty, the form falls back to opening the visitor's email client.
+NEXT_PUBLIC_FORMSPREE_ID=xpzgabcd
 ```
 
 ## ✏️ Make it yours
@@ -83,15 +85,29 @@ Almost all content lives in **`src/lib/data.ts`** — profile, roles, skills, th
 - **Certifications:** the entries in `data.ts` are placeholders — swap in your real titles, issuers and `url`s.
 - **Curated projects:** edit the `projects` array; the live GitHub strip auto‑excludes anything already curated (see `CURATED` in `src/lib/github.ts`).
 
-## ▲ Deploy to Vercel
+## ◆ Deploy to Netlify
 
-1. Push this repo to GitHub (already done).
-2. On [vercel.com/new](https://vercel.com/new), import the repo.
-3. **Set the Root Directory to `web`** (Project Settings → General).
-4. (Optional) add the env vars above.
-5. Deploy. Vercel auto‑detects Next.js — no extra config needed.
+The repo ships a root **`netlify.toml`** that points Netlify at the `web/` subfolder
+and enables the official Next.js runtime — so the full app (incl. the live GitHub
+strip with ISR) runs without any static-export limitations.
 
-The home page is statically prerendered with daily ISR for the live GitHub strip; `/api/contact` runs as a serverless function.
+1. Push this repo to GitHub.
+2. On [app.netlify.com](https://app.netlify.com) → **Add new site → Import an existing project** → pick the repo.
+3. Netlify reads `netlify.toml` automatically — **no manual build settings needed**
+   (base `web`, build `npm run build`, Next.js plugin, Node 22).
+4. Add the env vars above under **Site settings → Environment variables** (set
+   `NEXT_PUBLIC_SITE_URL` to your Netlify URL, and `NEXT_PUBLIC_FORMSPREE_ID` to receive messages).
+5. Deploy. 🎉
+
+> **Contact form:** uses [Formspree](https://formspree.io) when `NEXT_PUBLIC_FORMSPREE_ID`
+> is set (messages go to your inbox), otherwise it opens the visitor's email client.
+> No backend required, so it also works if you ever switch to a static host.
+
+### Prefer GitHub Pages?
+GitHub Pages is static-only. You'd add `output: "export"` + `basePath: "/MY-portfolio"`
+to `next.config.ts`, set `images.unoptimized: true`, and deploy `web/out` via GitHub
+Actions. The Formspree/mailto contact form already works without a server. Ask and this
+can be wired up.
 
 ---
 
