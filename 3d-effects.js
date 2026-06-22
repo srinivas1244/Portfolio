@@ -1,17 +1,18 @@
 /* ═══════════════════════════════════════════════════════════════
-   PERALA SRINIVASULU — SCROLL ANIMATION ENGINE
-   • Bidirectional  (scroll-down = forward, scroll-up = reverse)
-   • Velocity skew  (body tilts with scroll speed)
-   • Parallax depth (sections move at different rates)
-   • Scrub counters (stats count with scroll position)
-   • Section reveals with distinct personalities per section
+PERALA SRINIVASULU — SCROLL ANIMATION ENGINE
+• Bidirectional  (scroll-down = forward, scroll-up = reverse)
+• Velocity skew  (body tilts with scroll speed)
+• Parallax depth (sections move at different rates)
+• Scrub counters (stats count with scroll position)
+• Section reveals with distinct personalities per section
 ═══════════════════════════════════════════════════════════════ */
 
 document.addEventListener("DOMContentLoaded", () => {
 
   /* ─────────────────────────────────────────
-     1. LOADING SCREEN
+1. LOADING SCREEN
   ───────────────────────────────────────── */
+
   const loader = document.getElementById('loader');
   const loaderFill = document.querySelector('.loader-fill');
   let progress = 0;

@@ -3,6 +3,8 @@
 ═══════════════════════════════════════ */
 
 // ── Custom Cursor ──
+
+
 const cursor = document.querySelector('.cursor');
 const follower = document.querySelector('.cursor-follower');
 let mouseX = 0, mouseY = 0;

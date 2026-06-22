@@ -1,0 +1,254 @@
+@import "tailwindcss";
+
+/* ───────────────────────────  DESIGN TOKENS  ─────────────────────────── */
+/* ── Raw theme values (dark = default, overridden by .light) ── */
+:root {
+  color-scheme: dark;
+  --ink: #06060b;
+  --ink-2: #0a0a12;
+  --fg: #ececf3;
+  --muted: #9b9bb4;
+  --line: rgba(255, 255, 255, 0.08);
+  --surface: rgba(255, 255, 255, 0.035);
+  --surface-strong: rgba(12, 12, 20, 0.6);
+  --grad-start: #ffffff;
+  --selection-fg: #ffffff;
+  --card-shadow: 0 24px 60px -34px rgba(0, 0, 0, 0.8);
+  --dot: rgba(255, 255, 255, 0.06);
+  --grain-opacity: 0.035;
+}
+
+.light {
+  color-scheme: light;
+  --ink: #eef1f8;
+  --ink-2: #ffffff;
+  --fg: #181826;
+  --muted: #4f4f6a;
+  --line: rgba(22, 22, 55, 0.12);
+  --surface: rgba(255, 255, 255, 0.78);
+  --surface-strong: rgba(255, 255, 255, 0.92);
+  --grad-start: #181826;
+  --selection-fg: #ffffff;
+  --card-shadow: 0 20px 45px -26px rgba(40, 45, 100, 0.28);
+  --dot: rgba(30, 30, 75, 0.07);
+  --grain-opacity: 0.018;
+}
+
+/* ── Tailwind tokens map to the runtime vars so utilities flip with theme ── */
+@theme {
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+
+  /* Brand accents — identical in both themes */
+  --color-violet: #7c5cff;
+  --color-cyan: #22d3ee;
+  --color-magenta: #ff5ca8;
+  --color-amber: #ffb86b;
+
+  /* Fonts (wired to next/font CSS variables in layout.tsx) */
+  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* One-shot smooth cross-fade while toggling theme */
+.theme-anim,
+.theme-anim *,
+.theme-anim *::before,
+.theme-anim *::after {
+  transition: background-color 0.35s ease, border-color 0.35s ease, color 0.35s ease !important;
+}
+
+/* ───────────────────────────────  BASE  ─────────────────────────────── */
+* {
+  border-color: var(--color-line);
+}
+
+html {
+  scroll-behavior: auto; /* Lenis handles smooth scrolling */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--color-ink);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-violet) 45%, transparent);
+  color: var(--selection-fg);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 9px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--color-violet), var(--color-cyan));
+  border-radius: 99px;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+  line-height: 0.98;
+}
+
+/* Keyboard-only focus ring — visible for a11y, invisible on mouse/touch */
+:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--color-violet) 75%, transparent);
+  outline-offset: 2px;
+}
+
+/* Hide native cursor on devices that get the custom one (pointer: fine) */
+@media (pointer: fine) {
+  body.has-custom-cursor,
+  body.has-custom-cursor * {
+    cursor: none;
+  }
+}
+
+/* ──────────────────────────  UTILITY CLASSES  ───────────────────────── */
+@layer utilities {
+  .glass {
+    background: var(--surface);
+    border: 1px solid var(--color-line);
+    box-shadow: var(--card-shadow);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+  }
+
+  .glass-strong {
+    background: var(--surface-strong);
+    border: 1px solid var(--color-line);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+  }
+
+  .text-gradient {
+    background: linear-gradient(100deg, var(--grad-start) 0%, var(--color-violet) 45%, var(--color-cyan) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .text-gradient-warm {
+    background: linear-gradient(100deg, var(--color-amber), var(--color-magenta));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* thin uppercase eyebrow label */
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  .ring-glow {
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.06),
+      0 20px 60px -20px rgba(124, 92, 255, 0.45);
+  }
+
+  .form-input {
+    width: 100%;
+    border-radius: 0.9rem;
+    border: 1px solid var(--color-line);
+    background: var(--surface);
+    padding: 0.8rem 1rem;
+    font-size: 0.9rem;
+    color: var(--color-fg);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  }
+  .form-input::placeholder {
+    color: color-mix(in srgb, var(--color-muted) 70%, transparent);
+  }
+  .form-input:focus {
+    border-color: color-mix(in srgb, var(--color-violet) 60%, transparent);
+    background: var(--surface);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-violet) 18%, transparent);
+  }
+
+  /* Fine grain/noise overlay */
+  .grain::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: var(--grain-opacity);
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+/* ────────────────────────────  KEYFRAMES  ───────────────────────────── */
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+
+.animate-float { animation: float-y 6s ease-in-out infinite; }
+.animate-marquee { animation: marquee 38s linear infinite; }
+.animate-spin-slow { animation: spin-slow 22s linear infinite; }
+
+/* ── Isometric stack (tech-stack section) ── */
+.iso-scene {
+  perspective: 1300px;
+}
+.iso-slab {
+  transform: rotateX(56deg) rotateZ(-45deg);
+  transform-style: preserve-3d;
+  transition: transform 0.55s var(--ease-out-expo), box-shadow 0.55s ease, filter 0.55s ease;
+  will-change: transform;
+}
+.group:hover .iso-slab {
+  transform: rotateX(56deg) rotateZ(-45deg) translateZ(46px) scale(1.05);
+  filter: brightness(1.12);
+}
+
+/* Parallax dot grid used by the global background */
+.dot-grid {
+  background-image: radial-gradient(circle, var(--dot) 1px, transparent 1.6px);
+  background-size: 34px 34px;
+}
+
+/* ─────────────────────────  ACCESSIBILITY  ──────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

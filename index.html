@@ -1,596 +1,1438 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Perala Srinivasulu — Portfolio</title>
-  <meta name="description"
-    content="Perala Srinivasulu — Full-stack developer in Hyderabad. B.Tech CSE (KLH), React, Node.js, Python. Portfolio, projects, and contact.">
-  <meta name="theme-color" content="#0D0C0A">
-  <link rel="canonical" href="https://srinivas1244.github.io/MY-portfolio/">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Perala Srinivasulu — Portfolio">
-  <meta property="og:description"
-    content="Full-stack developer in Hyderabad. B.Tech CSE, React, Node.js, and modern web apps.">
-  <meta property="og:url" content="https://srinivas1244.github.io/MY-portfolio/">
-  <meta property="og:locale" content="en_IN">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Perala Srinivasulu — Portfolio">
-  <meta name="twitter:description"
-    content="Full-stack developer in Hyderabad. B.Tech CSE, React, Node.js, and modern web apps.">
-  <meta property="og:image" content="https://srinivas1244.github.io/MY-portfolio/profile.jpg">
-  <meta name="twitter:image" content="https://srinivas1244.github.io/MY-portfolio/profile.jpg">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perala Srinivasulu — AI Engineer & Full-Stack Developer</title>
+<meta name="description" content="Perala Srinivasulu — AI Engineer, Full-Stack Developer, Cloud Enthusiast. Building intelligent systems from Hyderabad.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+:root{
+  --void:#020205;
+  --void2:#04040a;
+  --glass:rgba(255,255,255,0.03);
+  --glass2:rgba(255,255,255,0.06);
+  --border:rgba(255,255,255,0.07);
+  --border2:rgba(255,255,255,0.14);
+  --text:#eeedf5;
+  --muted:#6b6980;
+  --dim:#3a3850;
+  --cyan:#00d4ff;
+  --cyan2:#00a8cc;
+  --amber:#ffb300;
+  --green:#00e676;
+  --white:#ffffff;
+  --ff-head:'Syne',sans-serif;
+  --ff-body:'Space Grotesk',sans-serif;
+  --ff-mono:'JetBrains Mono',monospace;
+}
 
-  <!-- ── Single merged Google Fonts link (Lobster + Playfair + DM Serif + Cormorant + Inter + JetBrains + Outfit) ── -->
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{
+  background:var(--void);
+  color:var(--text);
+  font-family:var(--ff-body);
+  overflow-x:hidden;
+  cursor:none;
+}
 
+/* SCROLLBAR */
+::-webkit-scrollbar{width:2px}
+::-webkit-scrollbar-track{background:var(--void)}
+::-webkit-scrollbar-thumb{background:var(--cyan2)}
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
-  <link rel="stylesheet" href="style.css?v=29">
-  <link rel="stylesheet" href="3d-effects.css?v=29">
+/* ─── CURSOR ─── */
+#cur{
+  position:fixed;width:10px;height:10px;
+  background:var(--cyan);border-radius:50%;
+  pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);
+  mix-blend-mode:screen;
+  transition:width .15s,height .15s,background .15s;
+}
+#cur2{
+  position:fixed;width:40px;height:40px;
+  border:1px solid rgba(0,212,255,.35);
+  border-radius:50%;pointer-events:none;z-index:9998;
+  transform:translate(-50%,-50%);
+  transition:width .5s cubic-bezier(.23,1,.32,1),height .5s cubic-bezier(.23,1,.32,1),border-color .3s;
+}
+body.hov #cur{width:18px;height:18px;background:var(--amber)}
+body.hov #cur2{width:70px;height:70px;border-color:rgba(255,179,0,.4)}
+
+/* ─── LOADER ─── */
+#loader{
+  position:fixed;inset:0;
+  background:var(--void);
+  z-index:10000;
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;
+  gap:40px;
+  transition:opacity .8s ease, visibility .8s ease;
+}
+#loader.out{opacity:0;visibility:hidden}
+.ld-logo{
+  font-family:var(--ff-head);
+  font-size:clamp(48px,10vw,96px);
+  font-weight:800;
+  letter-spacing:-.02em;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(0,212,255,.3);
+  line-height:1;
+  text-align:center;
+}
+.ld-logo b{
+  display:block;
+  color:var(--text);
+  -webkit-text-stroke:0;
+  font-size:.4em;
+  letter-spacing:.3em;
+  font-family:var(--ff-mono);
+  font-weight:300;
+  margin-top:8px;
+  opacity:0;
+  animation:fadeUp .6s .4s forwards;
+}
+.ld-bar{
+  width:160px;height:1px;
+  background:rgba(255,255,255,.08);
+  overflow:hidden;
+  position:relative;
+}
+.ld-fill{
+  height:100%;
+  background:linear-gradient(90deg,var(--cyan2),var(--cyan));
+  width:0;
+  animation:fillBar 1.6s cubic-bezier(.4,0,.2,1) .2s forwards;
+}
+.ld-pct{
+  font-family:var(--ff-mono);
+  font-size:11px;
+  color:var(--muted);
+  letter-spacing:.2em;
+}
+@keyframes fillBar{to{width:100%}}
+@keyframes fadeUp{to{opacity:1;transform:none}}
+
+/* ─── 3D CANVAS ─── */
+#bg3d{
+  position:fixed;inset:0;
+  z-index:0;
+  pointer-events:none;
+}
+
+/* ─── VIGNETTE ─── */
+.vignette{
+  position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(ellipse 80% 80% at 50% 50%, transparent 40%, rgba(2,2,5,.9) 100%);
+}
+
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:24px;left:50%;transform:translateX(-50%);
+  z-index:100;
+  display:flex;align-items:center;gap:0;
+  background:rgba(4,4,10,.7);
+  backdrop-filter:blur(20px);
+  border:1px solid var(--border2);
+  border-radius:100px;
+  padding:10px 20px;
+  transition:all .4s;
+}
+nav.scrolled{
+  background:rgba(2,2,5,.9);
+  box-shadow:0 0 40px rgba(0,212,255,.06);
+}
+.nav-logo{
+  font-family:var(--ff-head);
+  font-size:16px;font-weight:800;
+  color:var(--text);text-decoration:none;
+  letter-spacing:-.01em;
+  padding:0 16px 0 4px;
+  border-right:1px solid var(--border2);
+  margin-right:16px;
+}
+.nav-logo span{color:var(--cyan)}
+.nav-links{display:flex;gap:4px;list-style:none}
+.nav-links a{
+  font-size:12px;font-weight:500;
+  color:var(--muted);text-decoration:none;
+  padding:6px 14px;border-radius:100px;
+  transition:all .25s;letter-spacing:.02em;
+}
+.nav-links a:hover{color:var(--text);background:var(--glass2)}
+.nav-hire{
+  font-family:var(--ff-mono);font-size:11px;
+  color:var(--void);background:var(--cyan);
+  text-decoration:none;padding:7px 16px;
+  border-radius:100px;margin-left:12px;
+  font-weight:400;letter-spacing:.05em;
+  transition:all .25s;
+}
+.nav-hire:hover{background:var(--amber);transform:scale(1.04)}
+.nav-mob-btn{
+  display:none;background:none;border:none;cursor:none;
+  color:var(--text);font-size:18px;padding:4px;
+}
+
+/* MOBILE MENU */
+.mob-overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(2,2,5,.97);z-index:999;
+  flex-direction:column;align-items:center;justify-content:center;gap:48px;
+}
+.mob-overlay.open{display:flex}
+.mob-overlay a{
+  font-family:var(--ff-head);font-size:clamp(32px,8vw,56px);
+  font-weight:800;color:var(--text);text-decoration:none;
+  letter-spacing:-.02em;
+  transition:color .2s;
+}
+.mob-overlay a:hover{color:var(--cyan)}
+.mob-close{
+  position:absolute;top:24px;right:24px;
+  background:var(--glass2);border:1px solid var(--border2);
+  border-radius:50%;width:44px;height:44px;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--text);font-size:18px;cursor:none;
+}
+
+/* ─── SHARED SECTION ─── */
+section{
+  position:relative;z-index:2;
+  padding:140px clamp(24px,6vw,80px);
+}
+.container{max-width:1280px;margin:0 auto}
+
+.eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--ff-mono);font-size:11px;
+  letter-spacing:.25em;text-transform:uppercase;
+  color:var(--cyan);margin-bottom:28px;
+}
+.eyebrow::before{
+  content:'';display:block;
+  width:24px;height:1px;background:var(--cyan);
+}
+
+.headline{
+  font-family:var(--ff-head);font-size:clamp(56px,8vw,128px);
+  font-weight:800;line-height:.9;
+  letter-spacing:-.03em;color:var(--text);
+}
+.headline .stroke{
+  color:transparent;
+  -webkit-text-stroke:1px rgba(255,255,255,.2);
+}
+.headline .accent{
+  color:transparent;
+  -webkit-text-stroke:1.5px var(--cyan);
+}
+
+.body-l{
+  font-size:clamp(16px,2vw,20px);
+  line-height:1.7;color:var(--muted);
+  max-width:560px;
+}
+
+/* SCROLL APPEAR */
+.sa{opacity:0;transform:translateY(50px);
+  transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)}
+.sa.in{opacity:1;transform:none}
+.sa-d1{transition-delay:.1s}.sa-d2{transition-delay:.2s}.sa-d3{transition-delay:.3s}.sa-d4{transition-delay:.4s}
+
+/* ─── HERO ─── */
+#hero{
+  min-height:100vh;
+  display:flex;align-items:center;
+  padding-top:160px;
+}
+.hero-grid{
+  display:grid;
+  grid-template-columns:1fr 420px;
+  gap:80px;align-items:center;
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--ff-mono);font-size:11px;
+  color:var(--muted);letter-spacing:.15em;
+  border:1px solid var(--border2);
+  border-radius:100px;padding:6px 14px;
+  margin-bottom:32px;
+}
+.hero-tag span{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--green);
+  animation:pulse 2s infinite;
+}
+.hero-h1{
+  font-family:var(--ff-head);
+  font-size:clamp(64px,9vw,140px);
+  font-weight:800;line-height:.88;
+  letter-spacing:-.04em;
+  margin-bottom:32px;
+}
+.hero-h1 .l1{
+  display:block;color:var(--text);
+}
+.hero-h1 .l2{
+  display:block;
+  color:transparent;
+  -webkit-text-stroke:1.5px var(--cyan);
+  filter:drop-shadow(0 0 30px rgba(0,212,255,.2));
+}
+.hero-sub{
+  font-size:17px;line-height:1.75;
+  color:var(--muted);max-width:480px;
+  margin-bottom:48px;
+}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+.btn-p{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--cyan);color:var(--void);
+  font-family:var(--ff-mono);font-size:12px;
+  font-weight:400;letter-spacing:.08em;
+  text-transform:uppercase;text-decoration:none;
+  padding:14px 28px;border-radius:6px;
+  transition:all .25s;border:1px solid var(--cyan);
+}
+.btn-p:hover{background:transparent;color:var(--cyan);transform:translateY(-2px);
+  box-shadow:0 16px 40px rgba(0,212,255,.15)}
+.btn-g{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--glass);color:var(--text);
+  font-family:var(--ff-mono);font-size:12px;
+  font-weight:400;letter-spacing:.08em;
+  text-transform:uppercase;text-decoration:none;
+  padding:14px 28px;border-radius:6px;
+  border:1px solid var(--border2);
+  transition:all .25s;
+}
+.btn-g:hover{border-color:var(--cyan2);color:var(--cyan);transform:translateY(-2px)}
+.hero-socials{
+  display:flex;gap:12px;margin-top:36px;
+}
+.hero-socials a{
+  width:38px;height:38px;
+  border:1px solid var(--border2);border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--dim);font-size:15px;text-decoration:none;
+  transition:all .25s;
+}
+.hero-socials a:hover{border-color:var(--cyan);color:var(--cyan);background:rgba(0,212,255,.06)}
+
+/* Hero Card */
+.hero-card{
+  background:var(--glass);
+  border:1px solid var(--border2);
+  border-radius:20px;
+  padding:36px;
+  position:relative;
+  overflow:hidden;
+}
+.hero-card::before{
+  content:'';position:absolute;
+  top:-60px;right:-60px;
+  width:200px;height:200px;
+  background:radial-gradient(circle, rgba(0,212,255,.12) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hc-label{
+  font-family:var(--ff-mono);font-size:10px;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:var(--dim);margin-bottom:24px;
+}
+.hc-stat{
+  padding:16px 0;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.hc-stat:last-of-type{border-bottom:none}
+.hc-stat-label{font-size:13px;color:var(--muted)}
+.hc-stat-val{
+  font-family:var(--ff-mono);font-size:13px;
+  color:var(--cyan);letter-spacing:.05em;
+}
+.hc-status{
+  margin-top:24px;
+  background:rgba(0,230,118,.05);
+  border:1px solid rgba(0,230,118,.15);
+  border-radius:8px;
+  padding:14px 16px;
+  display:flex;align-items:center;gap:10px;
+  font-family:var(--ff-mono);font-size:11px;
+  color:var(--green);letter-spacing:.08em;
+}
+.pulse-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--green);flex-shrink:0;
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{
+  0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(0,230,118,.4)}
+  50%{opacity:.7;box-shadow:0 0 0 6px rgba(0,230,118,0)}
+}
+
+/* TICKER */
+.ticker-wrap{
+  position:relative;z-index:2;
+  overflow:hidden;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  background:rgba(0,0,0,.3);
+  padding:14px 0;
+}
+.ticker-track{
+  display:flex;gap:0;
+  animation:tick 25s linear infinite;
+  width:max-content;
+}
+.tick-item{
+  display:flex;align-items:center;gap:32px;
+  padding:0 32px;
+  font-family:var(--ff-mono);font-size:11px;
+  letter-spacing:.15em;color:var(--dim);
+  white-space:nowrap;
+}
+.tick-item em{color:var(--cyan);font-style:normal}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ─── ABOUT ─── */
+#about{background:var(--void2)}
+.about-layout{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:100px;margin-top:80px;align-items:start;
+}
+.about-text p{
+  font-size:15px;line-height:1.9;
+  color:var(--muted);margin-bottom:20px;
+}
+.about-text p strong{color:var(--text);font-weight:600}
+.about-text p em{color:var(--cyan);font-style:normal}
+.about-nums{
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  gap:1px;background:var(--border);
+  border:1px solid var(--border);border-radius:12px;
+  overflow:hidden;margin-top:48px;
+}
+.an-box{
+  background:var(--void2);padding:28px 20px;text-align:center;
+  transition:background .3s;
+}
+.an-box:hover{background:var(--glass2)}
+.an-n{
+  display:block;
+  font-family:var(--ff-head);font-size:52px;font-weight:800;
+  line-height:1;color:var(--cyan);
+}
+.an-l{
+  display:block;
+  font-family:var(--ff-mono);font-size:10px;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--dim);margin-top:8px;
+}
+.about-cards{display:flex;flex-direction:column;gap:14px}
+.ac{
+  background:var(--glass);
+  border:1px solid var(--border);
+  border-radius:12px;padding:24px;
+  display:flex;gap:18px;align-items:flex-start;
+  transition:all .3s;
+  position:relative;overflow:hidden;
+}
+.ac::after{
+  content:'';position:absolute;
+  left:0;top:0;bottom:0;width:2px;
+  background:var(--cyan);
+  transform:scaleY(0);transform-origin:bottom;
+  transition:transform .4s cubic-bezier(.23,1,.32,1);
+}
+.ac:hover{border-color:var(--border2);background:var(--glass2);transform:translateX(6px)}
+.ac:hover::after{transform:scaleY(1)}
+.ac-icon{
+  width:40px;height:40px;flex-shrink:0;
+  background:rgba(0,212,255,.07);border:1px solid rgba(0,212,255,.15);
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;color:var(--cyan);
+}
+.ac-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px}
+.ac-desc{font-size:13px;color:var(--muted);line-height:1.6}
+
+/* ─── SKILLS ─── */
+#skills{background:var(--void)}
+.skills-top{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:80px;align-items:end;margin-bottom:80px;
+}
+.skills-table{
+  border:1px solid var(--border);border-radius:12px;
+  overflow:hidden;
+}
+.st-row{
+  display:grid;grid-template-columns:180px 1fr;
+  border-bottom:1px solid var(--border);
+  transition:background .25s;
+}
+.st-row:last-child{border-bottom:none}
+.st-row:hover{background:var(--glass)}
+.st-cat{
+  padding:22px 24px;
+  font-family:var(--ff-mono);font-size:11px;
+  letter-spacing:.15em;text-transform:uppercase;
+  color:var(--dim);
+  border-right:1px solid var(--border);
+  display:flex;align-items:center;
+}
+.st-pills{
+  padding:18px 20px;
+  display:flex;flex-wrap:wrap;gap:8px;align-items:center;
+}
+.pill{
+  font-family:var(--ff-mono);font-size:11px;
+  letter-spacing:.06em;color:var(--muted);
+  background:var(--glass2);border:1px solid var(--border);
+  border-radius:4px;padding:5px 11px;
+  transition:all .2s;
+}
+.pill:hover{border-color:var(--cyan2);color:var(--cyan);background:rgba(0,212,255,.06)}
+.pill.hot{border-color:rgba(0,212,255,.25);color:var(--cyan);background:rgba(0,212,255,.06)}
+
+/* ─── PROJECTS ─── */
+#projects{background:var(--void2)}
+.proj-hd{
+  display:flex;align-items:flex-end;
+  justify-content:space-between;margin-bottom:64px;
+}
+.proj-list{display:flex;flex-direction:column;gap:2px}
+.pj{
+  display:grid;
+  grid-template-columns:80px 1fr auto;
+  gap:32px;align-items:center;
+  padding:32px 36px;
+  background:var(--glass);
+  border:1px solid var(--border);
+  border-radius:12px;
+  text-decoration:none;color:inherit;
+  transition:all .35s;
+  position:relative;overflow:hidden;
+}
+.pj::before{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(0,212,255,.04),transparent);
+  opacity:0;transition:opacity .35s;
+}
+.pj:hover{
+  border-color:rgba(0,212,255,.25);
+  background:rgba(0,212,255,.04);
+  transform:translateY(-2px);
+}
+.pj:hover::before{opacity:1}
+.pj-num{
+  font-family:var(--ff-head);
+  font-size:40px;font-weight:800;
+  color:var(--border2);line-height:1;
+  transition:color .35s;
+}
+.pj:hover .pj-num{color:rgba(0,212,255,.25)}
+.pj-body{}
+.pj-title{
+  font-size:18px;font-weight:700;
+  color:var(--text);letter-spacing:-.01em;
+  margin-bottom:6px;
+}
+.pj-desc{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:12px;max-width:600px}
+.pj-tags{display:flex;flex-wrap:wrap;gap:6px}
+.pt{
+  font-family:var(--ff-mono);font-size:10px;
+  letter-spacing:.08em;
+  color:var(--cyan2);
+  padding:3px 9px;border-radius:3px;
+  border:1px solid rgba(0,168,204,.2);
+  background:rgba(0,168,204,.05);
+}
+.pj-arrow{
+  width:44px;height:44px;
+  border:1px solid var(--border2);border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--muted);font-size:16px;
+  flex-shrink:0;transition:all .3s;
+}
+.pj:hover .pj-arrow{
+  border-color:var(--cyan);color:var(--cyan);
+  transform:rotate(-45deg);
+  background:rgba(0,212,255,.07);
+}
+
+/* ─── EXPERIENCE TIMELINE ─── */
+#experience{background:var(--void)}
+.exp-layout{
+  display:grid;grid-template-columns:260px 1fr;
+  gap:80px;margin-top:80px;
+}
+.exp-side{position:sticky;top:120px;height:fit-content}
+.exp-side-title{
+  font-family:var(--ff-head);font-size:18px;font-weight:800;
+  color:var(--text);margin-bottom:24px;
+  letter-spacing:-.01em;
+}
+.exp-side p{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:24px}
+.exp-side-link{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--ff-mono);font-size:11px;
+  letter-spacing:.1em;color:var(--cyan);
+  text-decoration:none;border-bottom:1px solid rgba(0,212,255,.25);
+  padding-bottom:2px;transition:border-color .2s;
+}
+.exp-side-link:hover{border-color:var(--cyan)}
+.tl{display:flex;flex-direction:column;gap:2px}
+.tl-item{
+  background:var(--glass);border:1px solid var(--border);
+  border-radius:12px;padding:32px;
+  position:relative;transition:border-color .3s;
+}
+.tl-item:hover{border-color:var(--border2)}
+.tl-period{
+  font-family:var(--ff-mono);font-size:10px;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:var(--cyan);margin-bottom:12px;
+  display:flex;align-items:center;gap:10px;
+}
+.tl-period::before{content:'';display:block;width:16px;height:1px;background:var(--cyan)}
+.tl-org{font-size:18px;font-weight:700;color:var(--text);margin-bottom:4px;letter-spacing:-.01em}
+.tl-role{font-size:13px;color:var(--cyan2);margin-bottom:14px}
+.tl-desc{font-size:13px;line-height:1.8;color:var(--muted)}
+.tl-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.chip{
+  font-family:var(--ff-mono);font-size:10px;
+  color:rgba(0,230,118,.8);letter-spacing:.08em;
+  padding:3px 9px;border-radius:3px;
+  border:1px solid rgba(0,230,118,.18);
+  background:rgba(0,230,118,.04);
+}
+
+/* ─── CONTACT ─── */
+#contact{background:var(--void2)}
+.contact-layout{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:100px;margin-top:80px;
+}
+.cl-left{}
+.ci{margin-bottom:40px}
+.ci-label{
+  font-family:var(--ff-mono);font-size:10px;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:var(--dim);margin-bottom:8px;
+}
+.ci-val{
+  font-size:16px;color:var(--text);
+  text-decoration:none;transition:color .2s;display:block;
+}
+a.ci-val:hover{color:var(--cyan)}
+.ci-val.avail{color:var(--green);display:flex;align-items:center;gap:8px}
+.contact-icons{display:flex;gap:10px;margin-top:40px}
+.cicon{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--ff-mono);font-size:11px;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);text-decoration:none;
+  border:1px solid var(--border2);
+  border-radius:8px;padding:10px 18px;
+  transition:all .25s;
+}
+.cicon:hover{border-color:var(--cyan);color:var(--cyan);background:rgba(0,212,255,.05)}
+.cl-right{}
+.fl{margin-bottom:18px}
+.flabel{
+  display:block;
+  font-family:var(--ff-mono);font-size:10px;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--dim);margin-bottom:8px;
+}
+.finput,.ftextarea{
+  width:100%;background:var(--glass);
+  border:1px solid var(--border2);border-radius:8px;
+  padding:14px 16px;font-family:var(--ff-body);font-size:15px;
+  color:var(--text);outline:none;transition:border-color .25s;
+  -webkit-appearance:none;
+}
+.finput::placeholder,.ftextarea::placeholder{color:var(--dim)}
+.finput:focus,.ftextarea:focus{border-color:var(--cyan)}
+.ftextarea{resize:vertical;min-height:110px}
+.fsub{
+  width:100%;margin-top:8px;
+  background:var(--cyan);color:var(--void);
+  font-family:var(--ff-mono);font-size:12px;
+  letter-spacing:.1em;text-transform:uppercase;
+  border:none;border-radius:8px;
+  padding:14px 28px;cursor:none;
+  transition:all .25s;display:flex;align-items:center;justify-content:center;gap:10px;
+}
+.fsub:hover{background:var(--amber);transform:translateY(-2px);box-shadow:0 20px 40px rgba(255,179,0,.2)}
+.fmsg{font-size:14px;color:var(--green);margin-top:12px;display:none}
+
+/* ─── FOOTER ─── */
+footer{
+  position:relative;z-index:2;
+  padding:32px clamp(24px,6vw,80px);
+  border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:16px;
+}
+.fl-logo{
+  font-family:var(--ff-head);font-size:18px;font-weight:800;
+  color:var(--text);letter-spacing:-.01em;
+}
+.fl-logo span{color:var(--cyan)}
+.fl-copy{font-family:var(--ff-mono);font-size:11px;color:var(--dim);letter-spacing:.08em}
+.fl-links{display:flex;gap:20px}
+.fl-links a{
+  font-family:var(--ff-mono);font-size:11px;
+  color:var(--dim);text-decoration:none;
+  letter-spacing:.08em;transition:color .2s;
+}
+.fl-links a:hover{color:var(--cyan)}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:960px){
+  section{padding:100px clamp(20px,5vw,48px)}
+  .hero-grid{grid-template-columns:1fr}
+  .hero-card{display:none}
+  .about-layout{grid-template-columns:1fr;gap:60px}
+  .skills-top{grid-template-columns:1fr;gap:40px}
+  .st-row{grid-template-columns:1fr}
+  .st-cat{border-right:none;border-bottom:1px solid var(--border);padding-bottom:12px}
+  .proj-hd{flex-direction:column;align-items:flex-start;gap:20px}
+  .pj{grid-template-columns:60px 1fr;gap:16px}
+  .pj-arrow{display:none}
+  .exp-layout{grid-template-columns:1fr;gap:40px}
+  .exp-side{position:static}
+  .contact-layout{grid-template-columns:1fr;gap:60px}
+  footer{flex-direction:column;align-items:flex-start}
+  nav{padding:8px 14px}
+  .nav-links,.nav-hire{display:none}
+  .nav-mob-btn{display:block}
+}
+@media(max-width:600px){
+  .hero-h1{font-size:clamp(52px,14vw,80px)}
+  .headline{font-size:clamp(48px,12vw,80px)}
+  .about-nums{grid-template-columns:1fr 1fr}
+  .an-box:last-child{grid-column:1/-1}
+  .pj{grid-template-columns:1fr;padding:24px}
+  .pj-num{font-size:28px}
+}
+</style>
 </head>
-
 <body>
 
-  <!-- ═══ LOADING SCREEN ═══ -->
-  <div id="loader" class="loader">
-    <div class="loader-inner">
-      <div class="loader-logo">PS<span class="dot">.</span></div>
-      <div class="loader-bar">
-        <div class="loader-fill"></div>
-      </div>
-      <p class="loader-text">Loading experience…</p>
-    </div>
+<!-- Cursor -->
+<div id="cur"></div>
+<div id="cur2"></div>
+
+<!-- Loader -->
+<div id="loader">
+  <div class="ld-logo">
+    PS
+    <b>PORTFOLIO — 2026</b>
   </div>
+  <div class="ld-bar"><div class="ld-fill"></div></div>
+  <div class="ld-pct" id="ldPct">INITIALIZING 3D SCENE...</div>
+</div>
 
-  <!-- ═══ 3D STACKED TYPOGRAPHY BACKGROUND ═══ -->
-  <div class="perspective-container">
-    <div class="stacked-text-bg">
-      <div class="stacked-word outline">CREATIVE</div>
-      <div class="stacked-word outline">DESIGNER</div>
-      <div class="stacked-word solid">DEVELOPER</div>
-    </div>
-  </div>
+<!-- 3D Background Canvas -->
+<canvas id="bg3d"></canvas>
+<div class="vignette"></div>
 
-  <style>
-    .perspective-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      perspective: 1200px;
-      z-index: -2;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      pointer-events: none;
-    }
+<!-- Nav -->
+<nav id="mainNav">
+  <a href="#hero" class="nav-logo">PS<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Journey</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="mailto:srinivasuluperala2006@gmail.com" class="nav-hire">Hire Me ↗</a>
+  <button class="nav-mob-btn" id="mobBtn" aria-label="Menu">&#9776;</button>
+</nav>
 
-    .stacked-text-bg {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      opacity: 0.2;
-      transform-style: preserve-3d;
-      transform: rotateX(25deg) rotateY(-15deg) translateZ(-200px);
-      will-change: transform;
-    }
+<!-- Mobile Overlay -->
+<div class="mob-overlay" id="mobMenu">
+  <button class="mob-close" id="mobClose">&#10005;</button>
+  <a href="#about" onclick="closeMob()">About</a>
+  <a href="#skills" onclick="closeMob()">Skills</a>
+  <a href="#projects" onclick="closeMob()">Projects</a>
+  <a href="#experience" onclick="closeMob()">Journey</a>
+  <a href="#contact" onclick="closeMob()">Contact</a>
+</div>
 
-    .stacked-word {
-      font-family: 'Outfit', sans-serif;
-      font-size: 18vw;
-      font-weight: 800;
-      line-height: 0.75;
-      text-transform: uppercase;
-      letter-spacing: -0.02em;
-      margin: 0;
-      padding: 0;
-      white-space: nowrap;
-      transform: scaleY(1.2);
-    }
-
-    .stacked-word.outline {
-      color: transparent;
-      -webkit-text-stroke: 2px #ffffff;
-    }
-
-    .stacked-word.solid {
-      color: #ffffff;
-      -webkit-text-stroke: none;
-    }
-  </style>
-
-  <!-- Custom Cursor -->
-  <div class="cursor"></div>
-  <div class="cursor-follower"></div>
-
-  <!-- Noise Overlay -->
-  <div class="noise"></div>
-
-  <!-- Navigation -->
-  <nav id="navbar">
-    <div class="nav-container">
-      <div class="logo">
-        <span class="logo-text">PS<span class="dot">.</span></span>
-      </div>
-      <div class="nav-links">
-        <a href="#home" class="nav-link">Home</a>
-        <a href="#about" class="nav-link">About</a>
-        <a href="#skills" class="nav-link">Skills</a>
-        <a href="#projects" class="nav-link">Projects</a>
-        <a href="#education" class="nav-link">Education</a>
-        <a href="#contact" class="nav-link contact-btn">Contact</a>
-      </div>
-      <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-    <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobileMenu">
-      <a href="#home" onclick="closeMenu()">Home</a>
-      <a href="#about" onclick="closeMenu()">About</a>
-      <a href="#skills" onclick="closeMenu()">Skills</a>
-      <a href="#projects" onclick="closeMenu()">Projects</a>
-      <a href="#education" onclick="closeMenu()">Education</a>
-      <a href="#contact" onclick="closeMenu()">Contact</a>
-    </div>
-  </nav>
-
-  <!-- ═══ MAIN CONTENT ═══ -->
-  <main id="smoothContent">
-
-    <!-- ═══ HERO SECTION ═══ -->
-    <section id="home" class="hero" data-scroll-speed="0.3">
-      <div class="hero-bg-text" data-scroll-speed="0.6">DEVELOPER</div>
-      <div class="hero-container">
-        <div class="hero-content">
-          <p class="hero-greeting anim-item">Hello, World! 👋</p>
-          <h1 class="hero-title">
-            <span class="line anim-item">I'm <em>Perala</em></span>
-            <span class="line anim-item">Srinivasulu</span>
-          </h1>
-          <div class="typewriter-wrap anim-item">
-            <span class="static-text">Full-Stack </span>
-            <span class="dynamic-text"></span>
-            <span class="cursor-blink">|</span>
-          </div>
-          <p class="hero-tagline anim-item">B.Tech CSE (KLH) · Hyderabad · React, Node &amp; vanilla JS builds</p>
-          <p class="hero-desc anim-item">
-            I ship responsive interfaces and full-stack features—clean structure, accessible markup,
-            and performance that holds up in the real world.
-          </p>
-          <div class="hero-actions anim-item">
-            <a href="#contact" class="btn-primary magnetic-btn">Let's Connect <i
-                class="fa-solid fa-arrow-right"></i></a>
-          </div>
-          <div class="social-row anim-item">
-            <a href="https://github.com/srinivas1244" class="social-icon magnetic-btn" aria-label="GitHub">
-              <i class="fa-brands fa-github"></i>
-            </a>
-            <a href="https://www.linkedin.com/in/perala-srinivasulu-068184315/" class="social-icon magnetic-btn"
-              aria-label="LinkedIn">
-              <i class="fa-brands fa-linkedin-in"></i>
-            </a>
-          </div>
+<!-- ════════════════ HERO ════════════════ -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-tag sa">
+          <span></span>
+          Available for Internships & Collaboration
         </div>
-        <div class="hero-visual">
-          <div class="image-frame tilt-card">
-            <div class="frame-deco frame-deco-1"></div>
-            <div class="frame-deco frame-deco-2"></div>
-            <img src="profile.jpg" alt="Perala Srinivasulu" class="hero-img"
-              onerror="if(!this.dataset.fallback){this.dataset.fallback='1';this.src='pp pic.jpg';} else {this.style.display='none'; this.parentNode.classList.add('no-image');}">
-            <div class="img-placeholder"><span>PS</span></div>
-            <div class="image-glow"></div>
-          </div>
-          <div class="floating-badge badge-1 magnetic-btn">
-            <i class="fa-solid fa-code"></i>
-            <span>Full-Stack Dev</span>
-          </div>
-          <div class="floating-badge badge-2 magnetic-btn">
-            <i class="fa-solid fa-star"></i>
-            <span>4+ Projects</span>
-          </div>
-        </div>
-      </div>
-      <div class="scroll-indicator">
-        <span>Scroll</span>
-        <div class="scroll-line"></div>
-      </div>
-    </section>
-
-    <!-- ═══ ABOUT SECTION ═══ -->
-    <section id="about" class="about">
-      <div class="section-container">
-        <div class="section-label anim-item">— About Me</div>
-        <div class="about-grid">
-          <div class="about-left">
-            <h2 class="section-title anim-item">Passionate about <em>building</em> the web</h2>
-            <p class="about-text anim-item">
-              Hello! I'm <strong>Perala Srinivasulu</strong>, a full-stack developer focused on the
-              JavaScript ecosystem (React, Node) plus Python and Java for coursework and APIs.
-              I care about layout that scales, forms that work, and code another engineer can follow.
-            </p>
-            <p class="about-text anim-item">
-              Outside class I build portfolio pieces and small apps to learn deployment, accessibility,
-              and performance. I am always iterating—reviews, refactors, and shipping to GitHub.
-            </p>
-            <div class="about-stats">
-              <div class="stat anim-item">
-                <span class="stat-num" data-target="10">0</span><span class="stat-plus">+</span>
-                <p>Technologies</p>
-              </div>
-              <div class="stat anim-item">
-                <span class="stat-num" data-target="4">0</span><span class="stat-plus">+</span>
-                <p>Projects Done</p>
-              </div>
-              <div class="stat anim-item">
-                <span class="stat-num" data-target="3">0</span><span class="stat-plus">+</span>
-                <p>Certifications</p>
-              </div>
-            </div>
-            <div class="certs-inline anim-item">
-              <h4 class="certs-heading">Credentials &amp; learning</h4>
-              <ul class="certs-list">
-                <li>University coursework: data structures, software engineering, web technologies</li>
-                <li>Self-paced tracks in modern JavaScript, React, and REST APIs</li>
-                <li>Regular practice on coding platforms and hackathon-style builds</li>
-              </ul>
-            </div>
-          </div>
-          <div class="about-right">
-            <div class="about-card-grid">
-              <div class="about-card tilt-card anim-item">
-                <i class="fa-solid fa-laptop-code"></i>
-                <h4>Clean Code</h4>
-                <p>Writing maintainable, scalable solutions</p>
-              </div>
-              <div class="about-card tilt-card anim-item">
-                <i class="fa-solid fa-palette"></i>
-                <h4>UI/UX Design</h4>
-                <p>Pixel-perfect, user-first interfaces</p>
-              </div>
-              <div class="about-card tilt-card anim-item">
-                <i class="fa-solid fa-bolt"></i>
-                <h4>Performance</h4>
-                <p>Fast, optimized, seamless experiences</p>
-              </div>
-              <div class="about-card tilt-card anim-item">
-                <i class="fa-solid fa-mobile-screen"></i>
-                <h4>Responsive</h4>
-                <p>Flawless on every device &amp; screen</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══ SKILLS SECTION ═══ -->
-    <section id="skills" class="skills">
-      <div class="section-container">
-        <div class="section-label anim-item">— Technical Arsenal</div>
-        <h2 class="section-title anim-item">Skills &amp; <em>Technologies</em></h2>
-        <p class="section-subtitle anim-item">Technologies I work with day-to-day to build exceptional products</p>
-
-        <div class="skills-wrapper">
-          <div class="skill-category tilt-card anim-item">
-            <div class="category-header">
-              <span class="category-num">01</span>
-              <h3>Frontend</h3>
-            </div>
-            <div class="skill-tags">
-              <div class="skill-tag"><i class="fa-brands fa-html5"></i><span>HTML5</span></div>
-              <div class="skill-tag"><i class="fa-brands fa-css3-alt"></i><span>CSS3</span></div>
-              <div class="skill-tag"><i class="fa-brands fa-js"></i><span>JavaScript</span></div>
-              <div class="skill-tag"><i class="fa-brands fa-react"></i><span>React.js</span></div>
-            </div>
-          </div>
-
-          <div class="skill-category tilt-card anim-item">
-            <div class="category-header">
-              <span class="category-num">02</span>
-              <h3>Backend &amp; Languages</h3>
-            </div>
-            <div class="skill-tags">
-              <div class="skill-tag"><i class="fa-brands fa-python"></i><span>Python</span></div>
-              <div class="skill-tag"><i class="fa-brands fa-java"></i><span>Java</span></div>
-              <div class="skill-tag"><i class="fa-brands fa-node-js"></i><span>Node.js</span></div>
-            </div>
-          </div>
-
-          <div class="skill-category tilt-card anim-item">
-            <div class="category-header">
-              <span class="category-num">03</span>
-              <h3>Databases</h3>
-            </div>
-            <div class="skill-tags">
-              <div class="skill-tag"><i class="fa-solid fa-database"></i><span>MySQL</span></div>
-              <div class="skill-tag"><i class="fa-solid fa-leaf"></i><span>MongoDB</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══ PROJECTS SECTION ═══ -->
-    <section id="projects" class="projects">
-      <div class="section-container">
-        <div class="section-label anim-item">— Selected Work</div>
-        <h2 class="section-title anim-item">Projects &amp; <em>Builds</em></h2>
-        <p class="section-subtitle anim-item">Live demos and source—swap links below as you ship more work.</p>
-
-        <div class="projects-grid">
-          <article class="project-card tilt-card anim-item">
-            <div class="project-card-top">
-              <span class="project-icon" aria-hidden="true"><i class="fa-solid fa-layer-group"></i></span>
-              <div class="project-tags">
-                <span>HTML</span><span>CSS</span><span>JavaScript</span>
-              </div>
-            </div>
-            <h3 class="project-title">Personal portfolio</h3>
-            <p class="project-desc">This site: responsive layout, custom interactions, and a real contact pipeline.</p>
-            <div class="project-links">
-              <a href="#home" class="project-link project-link-primary">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i> Live
-              </a>
-              <a href="https://github.com/srinivas1244/MY-portfolio" class="project-link" target="_blank"
-                rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Source</a>
-            </div>
-          </article>
-
-          <article class="project-card tilt-card anim-item">
-            <div class="project-card-top">
-              <span class="project-icon" aria-hidden="true"><i class="fa-solid fa-code"></i></span>
-              <div class="project-tags">
-                <span>React</span><span>JavaScript</span><span>UI</span>
-              </div>
-            </div>
-            <h3 class="project-title">Frontend UI kit</h3>
-            <p class="project-desc">Reusable components, responsive grids, and accessible patterns—link your deployed
-              demo when ready.</p>
-            <div class="project-links">
-              <a href="https://github.com/srinivas1244?tab=repositories" class="project-link project-link-primary"
-                target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Repositories</a>
-              <a href="https://github.com/srinivas1244" class="project-link" target="_blank"
-                rel="noopener noreferrer"><i class="fa-solid fa-user"></i> Profile</a>
-            </div>
-          </article>
-
-          <article class="project-card tilt-card anim-item">
-            <div class="project-card-top">
-              <span class="project-icon" aria-hidden="true"><i class="fa-solid fa-server"></i></span>
-              <div class="project-tags">
-                <span>Node.js</span><span>API</span><span>MongoDB</span>
-              </div>
-            </div>
-            <h3 class="project-title">REST API service</h3>
-            <p class="project-desc">CRUD routes, validation, and persistence—point the first link to your hosted API or
-              Swagger when live.</p>
-            <div class="project-links">
-              <a href="https://github.com/srinivas1244?tab=repositories" class="project-link project-link-primary"
-                target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Find repo</a>
-              <a href="#contact" class="project-link"><i class="fa-solid fa-envelope"></i> Discuss</a>
-            </div>
-          </article>
-
-          <article class="project-card tilt-card anim-item">
-            <div class="project-card-top">
-              <span class="project-icon" aria-hidden="true"><i class="fa-solid fa-bolt"></i></span>
-              <div class="project-tags">
-                <span>Python</span><span>Java</span><span>DSA</span>
-              </div>
-            </div>
-            <h3 class="project-title">Labs &amp; coursework</h3>
-            <p class="project-desc">Algorithms, OOP, and small utilities from university modules—publish your best repos
-              here.</p>
-            <div class="project-links">
-              <a href="https://github.com/srinivas1244" class="project-link project-link-primary" target="_blank"
-                rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
-              <a href="#contact" class="project-link"><i class="fa-solid fa-envelope"></i> Ask me</a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══ EDUCATION SECTION ═══ -->
-    <section id="education" class="education">
-      <div class="section-container">
-        <h2 class="section-title anim-item">Education &amp; <em>Learning</em></h2>
-
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-year">2024 – 2028</div>
-            <div class="timeline-card tilt-card">
-              <div class="timeline-icon"><i class="fa-solid fa-graduation-cap"></i></div>
-              <h3>KLH University, Hyderabad</h3>
-              <p class="timeline-role">B.Tech — Computer Science &amp; Engineering</p>
-              <p class="timeline-desc">Developed a strong foundation in algorithms, data structures, software
-                engineering, and web technologies. Actively participated in coding competitions and project hackathons.
-              </p>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-year">2022 – 2024</div>
-            <div class="timeline-card tilt-card">
-              <div class="timeline-icon"><i class="fa-solid fa-school"></i></div>
-              <h3>Page Junior College, Hyderabad</h3>
-              <p class="timeline-role">Intermediate (MPC)</p>
-              <p class="timeline-desc">MPC stream with intensive problem-solving for engineering entrance readiness;
-                strengthened calculus, mechanics, and first serious programming exposure alongside peer competitions.
-              </p>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-year">2019 – 2021</div>
-            <div class="timeline-card tilt-card">
-              <div class="timeline-icon"><i class="fa-solid fa-school"></i></div>
-              <h3>Sri Chaitanya School</h3>
-              <p class="timeline-role">Secondary school</p>
-              <p class="timeline-desc">Foundation years emphasizing STEM habits, board-aligned science and math, and
-                early analytical thinking that later fed into intermediate science and engineering prep.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══ CONTACT SECTION ═══ -->
-    <section id="contact" class="contact">
-      <div class="section-container">
-
-        <div class="section-label anim-item">— Get In Touch</div>
-
-        <h2 class="section-title anim-item">
-          Let's Build Something <em>Together</em>
-        </h2>
-
-        <p class="section-subtitle anim-item">
-          Open for collaborations, internships, freelance work, and creative tech projects.
+        <h1 class="hero-h1 sa sa-d1">
+          <span class="l1">PERALA</span>
+          <span class="l2">SRINIVAS.</span>
+        </h1>
+        <p class="hero-sub sa sa-d2">
+          AI Engineer · Full-Stack Developer · Cloud Enthusiast<br>
+          B.Tech CSE at KL University — building intelligent systems,
+          shipping production apps, and designing interfaces that hold up.
         </p>
-
-        <div class="contact-cards">
-
-          <!-- EMAIL -->
-          <a href="mailto:srinivasuluperala2006@gmail.com" class="contact-card tilt-card anim-item">
-
-            <div class="contact-glow"></div>
-
-            <div class="contact-top">
-              <div class="contact-card-icon">
-                <i class="fa-solid fa-envelope"></i>
-              </div>
-
-              <div class="contact-arrow">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-              </div>
-            </div>
-
-            <div class="contact-content">
-              <h3>Email</h3>
-
-              <p>
-                Reach out for collaborations, freelance opportunities, or project discussions.
-              </p>
-
-              <span>
-                srinivasuluperala2006@gmail.com
-              </span>
-            </div>
+        <div class="hero-btns sa sa-d3">
+          <a href="#projects" class="btn-p">View Projects &rarr;</a>
+          <a href="mailto:srinivasuluperala2006@gmail.com" class="btn-g">Get In Touch</a>
+        </div>
+        <div class="hero-socials sa sa-d4">
+          <a href="https://github.com/srinivas1244" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
           </a>
-
-          <!-- LINKEDIN -->
-          <a href="https://www.linkedin.com/in/perala-srinivasulu-068184315/" target="_blank"
-            class="contact-card tilt-card anim-item">
-
-            <div class="contact-glow"></div>
-
-            <div class="contact-top">
-              <div class="contact-card-icon">
-                <i class="fa-brands fa-linkedin-in"></i>
-              </div>
-
-              <div class="contact-arrow">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-              </div>
-            </div>
-
-            <div class="contact-content">
-              <h3>LinkedIn</h3>
-
-              <p>
-                Connect professionally and follow my development journey.
-              </p>
-
-              <span>
-                linkedin.com/in/perala-srinivasulu
-              </span>
-            </div>
+          <a href="https://www.linkedin.com/in/perala-srinivasulu-068184315/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
           </a>
-
-          <!-- GITHUB -->
-          <a href="https://github.com/srinivas1244" target="_blank" class="contact-card tilt-card anim-item">
-
-            <div class="contact-glow"></div>
-
-            <div class="contact-top">
-              <div class="contact-card-icon">
-                <i class="fa-brands fa-github"></i>
-              </div>
-
-              <div class="contact-arrow">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-              </div>
-            </div>
-
-            <div class="contact-content">
-              <h3>GitHub</h3>
-
-              <p>
-                Explore my repositories, experiments, and full-stack projects.
-              </p>
-
-              <span>
-                github.com/srinivas1244
-              </span>
-            </div>
+          <a href="mailto:srinivasuluperala2006@gmail.com" aria-label="Email" title="Email">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
           </a>
-
-          <!-- LOCATION -->
-          <div class="contact-card tilt-card anim-item">
-
-            <div class="contact-glow"></div>
-
-            <div class="contact-top">
-              <div class="contact-card-icon">
-                <i class="fa-solid fa-location-dot"></i>
-              </div>
-            </div>
-
-            <div class="contact-content">
-              <h3>Location</h3>
-
-              <p>
-                Based in Hyderabad, India and available for remote collaboration worldwide.
-              </p>
-
-              <span>
-                Hyderabad, India
-              </span>
-            </div>
-          </div>
-
         </div>
       </div>
-    </section>
 
-    <!-- ═══ FOOTER ═══ -->
-    <footer class="footer">
-      <div class="footer-container">
-        <div class="footer-logo">PS<span class="dot">.</span></div>
-        <p>Developed by Perala Srinivasulu</p>
-        <p class="footer-copy">&copy; 2026 All rights reserved.</p>
+      <!-- Info Card -->
+      <div class="hero-card sa sa-d2">
+        <div class="hc-label">// profile.json</div>
+        <div class="hc-stat">
+          <span class="hc-stat-label">Location</span>
+          <span class="hc-stat-val">Hyderabad, IN</span>
+        </div>
+        <div class="hc-stat">
+          <span class="hc-stat-label">University</span>
+          <span class="hc-stat-val">KL University</span>
+        </div>
+        <div class="hc-stat">
+          <span class="hc-stat-label">Degree</span>
+          <span class="hc-stat-val">B.Tech CSE</span>
+        </div>
+        <div class="hc-stat">
+          <span class="hc-stat-label">Graduation</span>
+          <span class="hc-stat-val">2028</span>
+        </div>
+        <div class="hc-stat">
+          <span class="hc-stat-label">Focus</span>
+          <span class="hc-stat-val">AI + Full-Stack</span>
+        </div>
+        <div class="hc-stat">
+          <span class="hc-stat-label">GitHub</span>
+          <span class="hc-stat-val">srinivas1244</span>
+        </div>
+        <div class="hc-status">
+          <div class="pulse-dot"></div>
+          OPEN TO OPPORTUNITIES
+        </div>
       </div>
-    </footer>
+    </div>
+  </div>
+</section>
 
-  </main>
+<!-- Ticker -->
+<div class="ticker-wrap">
+  <div class="ticker-track" id="ticker"></div>
+</div>
 
-  <!-- Three.js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-  <!-- Lenis smooth scroll -->
-  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
-  <!-- GSAP -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="script.js?v=29"></script>
-  <script src="3d-effects.js?v=29"></script>
+<!-- ════════════════ ABOUT ════════════════ -->
+<section id="about">
+  <div class="container">
+    <div class="eyebrow sa">About Me</div>
+    <h2 class="headline sa sa-d1">WHO<br>I <span class="accent">AM</span></h2>
+
+    <div class="about-layout">
+      <div class="about-text">
+        <p class="sa">I'm <strong>Perala Srinivasulu</strong> — a <em>final-year CSE student</em> at KL University, Hyderabad, building at the crossroads of AI engineering and full-stack development.</p>
+        <p class="sa sa-d1">My flagship project, the <strong>Student Academic Gap Analyzer</strong>, wires together Spring Boot 3, React 18, <em>Claude AI</em>, Supabase PostgreSQL, and Tesseract OCR into a production-grade intelligent system. I don't build demos — I build systems.</p>
+        <p class="sa sa-d2">Previously shipped <strong>SafeClick</strong> — an ML + ANN malicious link and PDF detector with a FastAPI backend and scikit-learn Random Forest models. I think end-to-end: feature pipelines, REST contracts, accessible UI, and deployment on day one.</p>
+        <p class="sa sa-d3">Outside projects, I actively learn deep learning (transformers, GANs, federated learning), study computer networks, and build interactive tooling to accelerate comprehension across every course I take.</p>
+        <div class="about-nums sa sa-d2">
+          <div class="an-box">
+            <span class="an-n" data-t="8">0</span>
+            <span class="an-l">Projects</span>
+          </div>
+          <div class="an-box">
+            <span class="an-n" data-t="15">0</span>
+            <span class="an-l">Tech Stack</span>
+          </div>
+          <div class="an-box">
+            <span class="an-n" data-t="3">0</span>
+            <span class="an-l">Certs</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-cards">
+        <div class="ac sa"><div class="ac-icon">&#129504;</div><div><div class="ac-title">AI Engineering</div><div class="ac-desc">Claude AI integration, ML pipelines, scikit-learn, TensorFlow, NLP and intelligent system design</div></div></div>
+        <div class="ac sa sa-d1"><div class="ac-icon">&#9889;</div><div><div class="ac-title">Full-Stack Development</div><div class="ac-desc">Spring Boot 3 · React 18 · REST APIs · JWT auth · Supabase · PostgreSQL · deployed systems</div></div></div>
+        <div class="ac sa sa-d2"><div class="ac-icon">&#9729;</div><div><div class="ac-title">Cloud & DevOps</div><div class="ac-desc">Render deployments, Docker basics, Supabase cloud, environment configuration, CI awareness</div></div></div>
+        <div class="ac sa sa-d3"><div class="ac-icon">&#127912;</div><div><div class="ac-title">UI / Motion Design</div><div class="ac-desc">GSAP, Framer Motion, Three.js, Lenis scroll, glassmorphism, 3D effects and interactive frontends</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ SKILLS ════════════════ -->
+<section id="skills">
+  <div class="container">
+    <div class="skills-top">
+      <div>
+        <div class="eyebrow sa">Technical Arsenal</div>
+        <h2 class="headline sa sa-d1">MY<br><span class="accent">STACK</span></h2>
+      </div>
+      <p class="body-l sa sa-d1">Technologies I reach for to ship production-grade AI-powered full-stack systems — every tool earned through real project experience.</p>
+    </div>
+
+    <div class="skills-table sa">
+      <div class="st-row">
+        <div class="st-cat">Frontend</div>
+        <div class="st-pills">
+          <span class="pill hot">React 18</span><span class="pill hot">TypeScript</span><span class="pill hot">Tailwind CSS</span><span class="pill">JavaScript ES6+</span><span class="pill">Vite</span><span class="pill hot">GSAP</span><span class="pill">Framer Motion</span><span class="pill">Three.js</span><span class="pill">HTML5</span><span class="pill">CSS3</span>
+        </div>
+      </div>
+      <div class="st-row">
+        <div class="st-cat">Backend</div>
+        <div class="st-pills">
+          <span class="pill hot">Spring Boot 3</span><span class="pill hot">Java</span><span class="pill">FastAPI</span><span class="pill hot">Python</span><span class="pill">Node.js</span><span class="pill">REST APIs</span><span class="pill">JWT Auth</span><span class="pill">Hibernate JPA</span>
+        </div>
+      </div>
+      <div class="st-row">
+        <div class="st-cat">AI / ML</div>
+        <div class="st-pills">
+          <span class="pill hot">Claude AI API</span><span class="pill hot">scikit-learn</span><span class="pill">TensorFlow</span><span class="pill">Random Forest</span><span class="pill">NLP</span><span class="pill">Tesseract OCR</span><span class="pill">Feature Engineering</span>
+        </div>
+      </div>
+      <div class="st-row">
+        <div class="st-cat">Cloud & Data</div>
+        <div class="st-pills">
+          <span class="pill hot">Supabase</span><span class="pill hot">PostgreSQL</span><span class="pill">MySQL</span><span class="pill">MongoDB</span><span class="pill">Render Deploy</span><span class="pill">Docker (basics)</span><span class="pill">Git / GitHub</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ PROJECTS ════════════════ -->
+<section id="projects">
+  <div class="container">
+    <div class="proj-hd">
+      <div>
+        <div class="eyebrow sa">Selected Work</div>
+        <h2 class="headline sa sa-d1">BUILT &amp;<br><span class="accent">SHIPPED</span></h2>
+      </div>
+      <a href="https://github.com/srinivas1244" target="_blank" rel="noopener" class="btn-g sa">All Projects &rarr;</a>
+    </div>
+
+    <div class="proj-list">
+      <a href="https://github.com/srinivas1244" target="_blank" rel="noopener" class="pj sa">
+        <div class="pj-num">01</div>
+        <div class="pj-body">
+          <div class="pj-title">Student Academic Gap Analyzer</div>
+          <div class="pj-desc">Full-stack AI-powered performance tracker integrating Spring Boot 3, React 18, Claude AI, Tesseract OCR for document parsing, JWT auth, and Supabase PostgreSQL. Real-time gap analysis with AI-generated learning recommendations.</div>
+          <div class="pj-tags">
+            <span class="pt">Spring Boot 3</span><span class="pt">React 18</span><span class="pt">Claude AI</span><span class="pt">Supabase</span><span class="pt">Tesseract OCR</span><span class="pt">JWT</span><span class="pt">Tailwind</span>
+          </div>
+        </div>
+        <div class="pj-arrow">↗</div>
+      </a>
+
+      <a href="https://github.com/srinivas1244" target="_blank" rel="noopener" class="pj sa sa-d1">
+        <div class="pj-num">02</div>
+        <div class="pj-body">
+          <div class="pj-title">SafeClick — Malicious Link & PDF Detector</div>
+          <div class="pj-desc">ML + ANN cybersecurity system. FastAPI backend with scikit-learn Random Forest for URL and PDF classification. Feature engineering pipeline, rule-based pre-check layer, iterative model retraining, React frontend with real-time results.</div>
+          <div class="pj-tags">
+            <span class="pt">FastAPI</span><span class="pt">scikit-learn</span><span class="pt">Random Forest</span><span class="pt">React</span><span class="pt">Python</span><span class="pt">ML Pipeline</span>
+          </div>
+        </div>
+        <div class="pj-arrow">↗</div>
+      </a>
+
+      <a href="https://github.com/srinivas1244" target="_blank" rel="noopener" class="pj sa sa-d2">
+        <div class="pj-num">03</div>
+        <div class="pj-body">
+          <div class="pj-title">SkillGap Analysis Platform</div>
+          <div class="pj-desc">React + Vite + Supabase SPA deployed on Render. Skill gap assessment with real-time database, dynamic analysis reports. Solved production host binding and build config challenges for seamless deployment.</div>
+          <div class="pj-tags">
+            <span class="pt">React</span><span class="pt">Vite</span><span class="pt">Supabase</span><span class="pt">PostgreSQL</span><span class="pt">Render</span>
+          </div>
+        </div>
+        <div class="pj-arrow">↗</div>
+      </a>
+
+      <a href="https://github.com/srinivas1244/MY-portfolio" target="_blank" rel="noopener" class="pj sa sa-d3">
+        <div class="pj-num">04</div>
+        <div class="pj-body">
+          <div class="pj-title">Personal Portfolio — Interactive 3D Experience</div>
+          <div class="pj-desc">This site. Full-viewport Three.js WebGL particle universe, GSAP scroll animations, custom cursor with physics, per-section reveal transitions. Dark cinematic design deployed on GitHub Pages.</div>
+          <div class="pj-tags">
+            <span class="pt">Three.js</span><span class="pt">WebGL</span><span class="pt">GSAP</span><span class="pt">CSS3</span><span class="pt">Vanilla JS</span>
+          </div>
+        </div>
+        <div class="pj-arrow">↗</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ EXPERIENCE ════════════════ -->
+<section id="experience">
+  <div class="container">
+    <div class="eyebrow sa">Journey</div>
+    <h2 class="headline sa sa-d1">EDUCATION &amp;<br><span class="accent">PATH</span></h2>
+
+    <div class="exp-layout">
+      <div class="exp-side sa">
+        <div class="exp-side-title">Building in public since 2024.</div>
+        <p>Every entry below is a chapter — not just a credential, but a period of genuine growth and production code shipped.</p>
+        <a href="https://github.com/srinivas1244" target="_blank" rel="noopener" class="exp-side-link">View GitHub profile ↗</a>
+      </div>
+
+      <div class="tl">
+        <div class="tl-item sa">
+          <div class="tl-period">2024 — 2028</div>
+          <div class="tl-org">KL University (KLH), Hyderabad</div>
+          <div class="tl-role">B.Tech — Computer Science & Engineering</div>
+          <div class="tl-desc">Capstone: AI-powered Student Academic Gap Analyzer. Deep learning, data structures, software engineering, cloud computing. Active in hackathons and coding competitions alongside shipping real systems.</div>
+          <div class="tl-chips"><span class="chip">AI/ML</span><span class="chip">Full-Stack</span><span class="chip">Cloud</span><span class="chip">DSA</span><span class="chip">Deep Learning</span></div>
+        </div>
+
+        <div class="tl-item sa sa-d1">
+          <div class="tl-period">2022 — 2024</div>
+          <div class="tl-org">Page Junior College, Hyderabad</div>
+          <div class="tl-role">Intermediate — MPC Stream</div>
+          <div class="tl-desc">Mathematics, Physics, Chemistry with intensive engineering entrance prep. First exposure to algorithmic thinking and programming fundamentals that underpin every system I build today.</div>
+          <div class="tl-chips"><span class="chip">Mathematics</span><span class="chip">Physics</span><span class="chip">Algorithms</span></div>
+        </div>
+
+        <div class="tl-item sa sa-d2">
+          <div class="tl-period">2019 — 2021</div>
+          <div class="tl-org">Sri Chaitanya School</div>
+          <div class="tl-role">Secondary School (CBSE)</div>
+          <div class="tl-desc">Foundation in STEM disciplines, analytical thinking, and academic excellence. Competitive exam preparation that built the problem-solving muscle used in every project today.</div>
+          <div class="tl-chips"><span class="chip">STEM Foundation</span><span class="chip">Competitive Prep</span></div>
+        </div>
+
+        <div class="tl-item sa sa-d3">
+          <div class="tl-period">Ongoing</div>
+          <div class="tl-org">Self-Directed Learning</div>
+          <div class="tl-role">Certifications & Independent Study</div>
+          <div class="tl-desc">Continuous upskilling in transformers, GANs, federated learning, Spring Boot, React ecosystem, computer networks, Edge AI, and cloud architecture. Building interactive study systems for accelerated comprehension.</div>
+          <div class="tl-chips"><span class="chip">Deep Learning</span><span class="chip">Spring Boot</span><span class="chip">React</span><span class="chip">Cloud</span><span class="chip">Edge AI</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ CONTACT ════════════════ -->
+<section id="contact">
+  <div class="container">
+    <div class="eyebrow sa">Get In Touch</div>
+    <h2 class="headline sa sa-d1">LET'S<br><span class="accent">BUILD.</span></h2>
+
+    <div class="contact-layout">
+      <div class="cl-left sa sa-d1">
+        <p class="body-l" style="margin-bottom:56px">Open for internships, collaborations, freelance, and creative tech projects. I respond fast. Let's make something worth shipping.</p>
+        <div class="ci">
+          <div class="ci-label">Email</div>
+          <a href="mailto:srinivasuluperala2006@gmail.com" class="ci-val">srinivasuluperala2006@gmail.com</a>
+        </div>
+        <div class="ci">
+          <div class="ci-label">Location</div>
+          <span class="ci-val">Hyderabad, India — Remote Available</span>
+        </div>
+        <div class="ci">
+          <div class="ci-label">Status</div>
+          <span class="ci-val avail"><span class="pulse-dot"></span>Available for Internships & Projects</span>
+        </div>
+        <div class="contact-icons">
+          <a href="https://github.com/srinivas1244" target="_blank" rel="noopener" class="cicon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+            GitHub
+          </a>
+          <a href="https://www.linkedin.com/in/perala-srinivasulu-068184315/" target="_blank" rel="noopener" class="cicon">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+
+      <div class="cl-right sa sa-d2">
+        <form id="cForm" onsubmit="submitForm(event)">
+          <div class="fl"><label class="flabel">Name</label><input class="finput" type="text" placeholder="Your name" required></div>
+          <div class="fl"><label class="flabel">Email</label><input class="finput" type="email" placeholder="your@email.com" required></div>
+          <div class="fl"><label class="flabel">Subject</label><input class="finput" type="text" placeholder="Internship · Collaboration · Project"></div>
+          <div class="fl"><label class="flabel">Message</label><textarea class="ftextarea" placeholder="Tell me what you're building..." required></textarea></div>
+          <button type="submit" class="fsub">Send Message &nbsp;&#9654;</button>
+          <div class="fmsg" id="fmsg">✓ Message sent! I'll reply soon.</div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="fl-logo">PS<span>.</span></div>
+  <div class="fl-links">
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <span class="fl-copy">© 2026 Perala Srinivasulu</span>
+</footer>
+
+<!-- Three.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+
+<script>
+// ════════════════════════════════════════
+// PERALA SRINIVASULU — PORTFOLIO 3D ENGINE
+// ════════════════════════════════════════
+
+// ── Cursor ──
+const cur = document.getElementById('cur');
+const cur2 = document.getElementById('cur2');
+let mx = 0, my = 0, rx = 0, ry = 0;
+const fine = window.matchMedia('(pointer:fine)');
+if(fine.matches){
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cur.style.left = mx+'px'; cur.style.top = my+'px';
+  });
+  (function tick(){
+    rx += (mx-rx)*.09; ry += (my-ry)*.09;
+    cur2.style.left = Math.round(rx)+'px';
+    cur2.style.top  = Math.round(ry)+'px';
+    requestAnimationFrame(tick);
+  })();
+  document.querySelectorAll('a,button,.pj,.ac,.tl-item,.pill,.about-card').forEach(el=>{
+    el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));
+    el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));
+  });
+}
+
+// ── Loader ──
+const msgs = ['LOADING SHADERS...','BUILDING PARTICLE MESH...','INITIALIZING SCENE...','READY'];
+let mIdx = 0;
+const ldPct = document.getElementById('ldPct');
+const mTimer = setInterval(()=>{
+  mIdx++;
+  if(mIdx < msgs.length){ ldPct.textContent = msgs[mIdx]; }
+  else clearInterval(mTimer);
+},400);
+
+window.addEventListener('load', () => {
+  setTimeout(()=>{
+    document.getElementById('loader').classList.add('out');
+    initHeroAnimations();
+  }, 1800);
+});
+
+// ── Nav scroll ──
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', ()=>nav.classList.toggle('scrolled', scrollY>80));
+
+// ── Mobile Menu ──
+document.getElementById('mobBtn').onclick = ()=>document.getElementById('mobMenu').classList.add('open');
+document.getElementById('mobClose').onclick = ()=>document.getElementById('mobMenu').classList.remove('open');
+function closeMob(){ document.getElementById('mobMenu').classList.remove('open'); }
+
+// ── Ticker ──
+const tItems = ['REACT 18','SPRING BOOT','CLAUDE AI','PYTHON','THREE.JS','SUPABASE','GSAP','FASTAPI','TAILWIND CSS','POSTGRESQL','SCIKIT-LEARN','NODE.JS','TENSORFLOW','VITE'];
+const tEl = document.getElementById('ticker');
+const doubled = [...tItems,...tItems];
+tEl.innerHTML = doubled.map(t=>`<div class="tick-item">${t} <em>✦</em></div>`).join('');
+
+// ── Scroll reveal ──
+const saEls = document.querySelectorAll('.sa');
+const sObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
+},{threshold:0.08,rootMargin:'0px 0px -40px 0px'});
+saEls.forEach(el=>sObs.observe(el));
+
+// ── Stat counters ──
+document.querySelectorAll('[data-t]').forEach(el=>{
+  const target = +el.dataset.t;
+  const io = new IntersectionObserver(entries=>{
+    if(!entries[0].isIntersecting) return;
+    let c=0, step=target/30;
+    const t=setInterval(()=>{ c=Math.min(c+step,target); el.textContent=Math.floor(c); if(c>=target) clearInterval(t); },40);
+    io.disconnect();
+  },{threshold:.5});
+  io.observe(el);
+});
+
+// ── Hero text animations ──
+function initHeroAnimations(){
+  const heroItems = document.querySelectorAll('#hero .sa');
+  heroItems.forEach((el,i)=>{
+    el.style.transitionDelay = (i*0.12)+'s';
+    el.classList.add('in');
+  });
+}
+
+// ── Form ──
+function submitForm(e){
+  e.preventDefault();
+  const btn = e.target.querySelector('.fsub');
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+  setTimeout(()=>{
+    document.getElementById('fmsg').style.display='block';
+    e.target.reset();
+    btn.textContent = 'Message Sent ✓';
+    setTimeout(()=>{
+      btn.textContent='Send Message ▶';
+      btn.disabled=false;
+      document.getElementById('fmsg').style.display='none';
+    },4000);
+  },1200);
+}
+
+// ════════════════════════════════════════
+// THREE.JS 3D BACKGROUND — PARTICLE UNIVERSE
+// ════════════════════════════════════════
+(function init3D(){
+  if(!window.THREE) return;
+
+  const canvas = document.getElementById('bg3d');
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.setClearColor(0x000000, 0);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(60, innerWidth/innerHeight, 0.1, 2000);
+  camera.position.set(0, 0, 400);
+
+  function onResize(){
+    renderer.setSize(innerWidth, innerHeight);
+    camera.aspect = innerWidth/innerHeight;
+    camera.updateProjectionMatrix();
+  }
+  onResize();
+  window.addEventListener('resize', onResize);
+
+  // ── Mouse tracking ──
+  let targetX = 0, targetY = 0, currentX = 0, currentY = 0;
+  document.addEventListener('mousemove', e=>{
+    targetX = (e.clientX/innerWidth  - .5) * 2;
+    targetY = (e.clientY/innerHeight - .5) * 2;
+  });
+
+  // ── 1. STAR FIELD — deep background ──
+  const starCount = 3000;
+  const starPos = new Float32Array(starCount * 3);
+  const starSizes = new Float32Array(starCount);
+  for(let i=0; i<starCount; i++){
+    const r = 400 + Math.random()*800;
+    const theta = Math.random()*Math.PI*2;
+    const phi   = Math.acos(2*Math.random()-1);
+    starPos[i*3]   = r*Math.sin(phi)*Math.cos(theta);
+    starPos[i*3+1] = r*Math.sin(phi)*Math.sin(theta);
+    starPos[i*3+2] = r*Math.cos(phi);
+    starSizes[i] = Math.random()*1.5 + 0.3;
+  }
+  const starGeo = new THREE.BufferGeometry();
+  starGeo.setAttribute('position', new THREE.BufferAttribute(starPos,3));
+  starGeo.setAttribute('size',     new THREE.BufferAttribute(starSizes,1));
+  const starMat = new THREE.PointsMaterial({
+    color:0xffffff, size:0.8, transparent:true, opacity:0.6,
+    sizeAttenuation:true
+  });
+  scene.add(new THREE.Points(starGeo, starMat));
+
+  // ── 2. NEBULA PARTICLES — mid-depth colored cloud ──
+  const nebCount = 800;
+  const nebPos   = new Float32Array(nebCount*3);
+  const nebCols  = new Float32Array(nebCount*3);
+  for(let i=0; i<nebCount; i++){
+    const r = 80 + Math.random()*200;
+    const theta = Math.random()*Math.PI*2;
+    const phi   = Math.acos(2*Math.random()-1);
+    nebPos[i*3]   = r*Math.sin(phi)*Math.cos(theta);
+    nebPos[i*3+1] = r*Math.sin(phi)*Math.sin(theta);
+    nebPos[i*3+2] = r*Math.cos(phi) - 100;
+    // Colors: cyan to teal gradient
+    const t = Math.random();
+    nebCols[i*3]   = t*0.0 + (1-t)*0.0;
+    nebCols[i*3+1] = t*0.83+ (1-t)*0.4;
+    nebCols[i*3+2] = t*1.0 + (1-t)*0.8;
+  }
+  const nebGeo = new THREE.BufferGeometry();
+  nebGeo.setAttribute('position', new THREE.BufferAttribute(nebPos,3));
+  nebGeo.setAttribute('color',    new THREE.BufferAttribute(nebCols,3));
+  const nebMat = new THREE.PointsMaterial({
+    vertexColors:true, size:2.5, transparent:true, opacity:0.15, sizeAttenuation:true
+  });
+  scene.add(new THREE.Points(nebGeo, nebMat));
+
+  // ── 3. NEURAL NETWORK — interconnected floating nodes ──
+  const nodeCount = 55;
+  const nodePositions = [];
+  for(let i=0; i<nodeCount; i++){
+    nodePositions.push(new THREE.Vector3(
+      (Math.random()-.5)*320,
+      (Math.random()-.5)*220,
+      (Math.random()-.5)*180 - 60
+    ));
+  }
+
+  // Node spheres
+  const nodeGeo = new THREE.SphereGeometry(1.2, 6, 6);
+  const nodeMat = new THREE.MeshBasicMaterial({color:0x00d4ff, transparent:true, opacity:0.5});
+  const nodeGroup = new THREE.Group();
+  nodePositions.forEach(pos=>{
+    const mesh = new THREE.Mesh(nodeGeo, nodeMat.clone());
+    mesh.position.copy(pos);
+    mesh.userData.baseY = pos.y;
+    mesh.userData.speed = .003 + Math.random()*.005;
+    mesh.userData.phase = Math.random()*Math.PI*2;
+    nodeGroup.add(mesh);
+  });
+  scene.add(nodeGroup);
+
+  // Edges between nearby nodes
+  const edgeGeo = new THREE.BufferGeometry();
+  const edgePositions = [];
+  const maxDist = 100;
+  for(let i=0; i<nodeCount; i++){
+    for(let j=i+1; j<nodeCount; j++){
+      if(nodePositions[i].distanceTo(nodePositions[j]) < maxDist){
+        edgePositions.push(
+          nodePositions[i].x, nodePositions[i].y, nodePositions[i].z,
+          nodePositions[j].x, nodePositions[j].y, nodePositions[j].z
+        );
+      }
+    }
+  }
+  edgeGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(edgePositions),3));
+  const edgeMat = new THREE.LineSegmentsMaterial({
+    color:0x00d4ff, transparent:true, opacity:0.04
+  });
+  scene.add(new THREE.LineSegments(edgeGeo, edgeMat));
+
+  // ── 4. LARGE FLOATING GEOMETRIC SHAPES ──
+  // Central icosahedron
+  const icoGeo = new THREE.IcosahedronGeometry(42, 1);
+  const icoWire= new THREE.WireframeGeometry(icoGeo);
+  const icoDot = new THREE.LineSegments(icoWire,
+    new THREE.LineBasicMaterial({color:0x00d4ff, transparent:true, opacity:0.04}));
+  icoDot.position.set(160, -40, -80);
+  scene.add(icoDot);
+
+  // Octahedron left
+  const octGeo = new THREE.OctahedronGeometry(26, 0);
+  const octWire= new THREE.WireframeGeometry(octGeo);
+  const octMesh= new THREE.LineSegments(octWire,
+    new THREE.LineBasicMaterial({color:0xffb300, transparent:true, opacity:0.06}));
+  octMesh.position.set(-180, 60, -60);
+  scene.add(octMesh);
+
+  // Torus ring
+  const torGeo = new THREE.TorusGeometry(55, 0.8, 8, 80);
+  const torMesh= new THREE.Mesh(torGeo,
+    new THREE.MeshBasicMaterial({color:0x00d4ff, transparent:true, opacity:0.06}));
+  torMesh.position.set(0, 30, -120);
+  torMesh.rotation.x = Math.PI*.35;
+  scene.add(torMesh);
+
+  // Outer torus ring
+  const tor2Geo = new THREE.TorusGeometry(80, 0.5, 6, 120);
+  const tor2Mesh= new THREE.Mesh(tor2Geo,
+    new THREE.MeshBasicMaterial({color:0xffb300, transparent:true, opacity:0.03}));
+  tor2Mesh.position.set(0, 30, -120);
+  tor2Mesh.rotation.x = Math.PI*.5;
+  tor2Mesh.rotation.z = Math.PI*.2;
+  scene.add(tor2Mesh);
+
+  // ── 5. FLOWING PARTICLE STREAMS (two helical paths) ──
+  const streamCount = 300;
+  const streamPos = new Float32Array(streamCount*3);
+  const streamPhases = new Float32Array(streamCount);
+  for(let i=0; i<streamCount; i++){
+    streamPhases[i] = (i/streamCount)*Math.PI*6;
+    streamPos[i*3]   = Math.cos(streamPhases[i])*50;
+    streamPos[i*3+1] = (i/streamCount)*200 - 100;
+    streamPos[i*3+2] = Math.sin(streamPhases[i])*50 - 80;
+    streamPhases[i] = streamPhases[i]; // keep for anim
+  }
+  const streamGeo = new THREE.BufferGeometry();
+  streamGeo.setAttribute('position', new THREE.BufferAttribute(streamPos,3));
+  const streamMat = new THREE.PointsMaterial({
+    color:0x00d4ff, size:1.4, transparent:true, opacity:0.25, sizeAttenuation:true
+  });
+  const stream1 = new THREE.Points(streamGeo, streamMat);
+  stream1.position.set(-140, 0, -40);
+  scene.add(stream1);
+
+  // ── Ambient light pulse effect (simulated via color cycle) ──
+  let tick = 0;
+
+  // ── Animate ──
+  function animate(){
+    requestAnimationFrame(animate);
+    tick += 0.008;
+
+    // Lerp camera to mouse
+    currentX += (targetX - currentX) * 0.04;
+    currentY += (targetY - currentY) * 0.04;
+    camera.position.x = currentX * 30;
+    camera.position.y = -currentY * 20;
+    camera.lookAt(0, 0, -60);
+
+    // Rotate neural network slowly
+    nodeGroup.rotation.y = tick * 0.06;
+    nodeGroup.rotation.x = Math.sin(tick * 0.03) * 0.1;
+
+    // Float individual nodes
+    nodeGroup.children.forEach(m=>{
+      m.position.y = m.userData.baseY + Math.sin(tick*m.userData.speed*6 + m.userData.phase)*5;
+    });
+
+    // Rotate geometric shapes
+    icoDot.rotation.y += 0.003;
+    icoDot.rotation.x += 0.001;
+    octMesh.rotation.y -= 0.005;
+    octMesh.rotation.z += 0.002;
+    torMesh.rotation.z += 0.002;
+    tor2Mesh.rotation.y += 0.001;
+
+    // Animate helix stream
+    const sPos = stream1.geometry.attributes.position.array;
+    for(let i=0; i<streamCount; i++){
+      const phase = streamPhases[i] + tick * 0.8;
+      sPos[i*3]   = Math.cos(phase)*50;
+      sPos[i*3+2] = Math.sin(phase)*50;
+    }
+    stream1.geometry.attributes.position.needsUpdate = true;
+
+    // Slowly drift stars
+    starMat.opacity = 0.5 + Math.sin(tick*.2)*.1;
+
+    // Pulse nebula
+    nebMat.opacity = 0.1 + Math.sin(tick*.15)*.05;
+
+    renderer.render(scene, camera);
+  }
+  animate();
+})();
+</script>
 </body>
-
 </html>
+
