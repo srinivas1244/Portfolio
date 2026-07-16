@@ -21,7 +21,7 @@ const spaceGrotesk = Space_Grotesk({
   weight: ["400", "500", "600", "700"],
 });
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://srinivas1244.github.io/MY-portfolio";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://srinivas1244.github.io/Portfolio";
 const description =
   "Perala Srinivasulu — AI Engineer, Full-Stack Developer & Cloud Enthusiast based in Hyderabad. Building intelligent products with React, Spring Boot, and LLMs like Gemini & Claude.";
 

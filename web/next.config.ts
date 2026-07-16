@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
-// Base path for GitHub Pages project sites (srinivas1244.github.io/MY-portfolio).
-// Set NEXT_PUBLIC_BASE_PATH=/MY-portfolio in the deploy workflow; empty locally so
+// Base path for the GitHub Pages project site (srinivas1244.github.io/Portfolio).
+// Set NEXT_PUBLIC_BASE_PATH=/Portfolio in the deploy workflow; empty locally so
 // `npm run dev` / `npm run build` still serve from the root.
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 

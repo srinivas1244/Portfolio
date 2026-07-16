@@ -95,9 +95,9 @@ and publishes `web/out` to Pages on every push to `main`.
 1. Push this repo to GitHub (branch `main`).
 2. Repo **Settings → Pages → Build and deployment → Source: GitHub Actions**.
 3. Done — the workflow builds & deploys automatically. Site goes live at
-   **`https://srinivas1244.github.io/MY-portfolio`**.
+   **`https://srinivas1244.github.io/Portfolio`**.
 
-The workflow sets `NEXT_PUBLIC_BASE_PATH=/MY-portfolio` (so assets resolve under the
+The workflow sets `NEXT_PUBLIC_BASE_PATH=/Portfolio` (so assets resolve under the
 subpath) and `NEXT_PUBLIC_SITE_URL`. Locally, `npm run dev` / `npm run build` run with
 no base path so everything serves from the root as usual.
 

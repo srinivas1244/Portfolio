@@ -1,6 +1,6 @@
 import { profile } from "@/lib/data";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://srinivas1244.github.io/MY-portfolio";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://srinivas1244.github.io/Portfolio";
 
 export function JsonLdSchema() {
   const schema = {
