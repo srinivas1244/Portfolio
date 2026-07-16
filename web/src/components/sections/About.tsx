@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { MapPin, Sparkles } from "lucide-react";
 import { profile, journeyArc, aboutHighlights } from "@/lib/data";
+import { withBase } from "@/lib/basePath";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { Counter } from "@/components/ui/Counter";
@@ -25,7 +26,9 @@ export function About() {
         <Reveal className="relative mx-auto w-full max-w-sm lg:sticky lg:top-28">
           <div className="ring-glow relative aspect-[4/5] overflow-hidden rounded-[28px] glass">
             <Image
-              src="/profile.jpg"
+              // `unoptimized` images skip Next's optimizer, which is what normally
+              // applies basePath — so prefix it explicitly for GitHub Pages.
+              src={withBase("/profile.jpg")}
               alt={profile.name}
               fill
               sizes="(max-width: 1024px) 90vw, 420px"
