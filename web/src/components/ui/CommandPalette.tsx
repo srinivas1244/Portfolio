@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/BrandIcons";
 import { navItems, profile } from "@/lib/data";
+import { withBase } from "@/lib/basePath";
 import { cn } from "@/lib/utils";
 
 type Cmd = {
@@ -109,7 +110,7 @@ export function CommandPalette() {
         keywords: "cv pdf hire",
         run: () => {
           close();
-          window.open(profile.resumeUrl, "_blank", "noopener,noreferrer");
+          window.open(withBase(profile.resumeUrl), "_blank", "noopener,noreferrer");
         },
       },
       {

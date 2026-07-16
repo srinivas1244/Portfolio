@@ -85,29 +85,32 @@ Almost all content lives in **`src/lib/data.ts`** — profile, roles, skills, th
 - **Certifications:** the entries in `data.ts` are placeholders — swap in your real titles, issuers and `url`s.
 - **Curated projects:** edit the `projects` array; the live GitHub strip auto‑excludes anything already curated (see `CURATED` in `src/lib/github.ts`).
 
-## ◆ Deploy to Netlify
+## ◆ Deploy to GitHub Pages (configured)
 
-The repo ships a root **`netlify.toml`** that points Netlify at the `web/` subfolder
-and enables the official Next.js runtime — so the full app (incl. the live GitHub
-strip with ISR) runs without any static-export limitations.
+The app is set up as a **static export** (`output: "export"` in `next.config.ts`) and
+ships a GitHub Actions workflow at **`.github/workflows/deploy.yml`** that builds `web/`
+and publishes `web/out` to Pages on every push to `main`.
 
-1. Push this repo to GitHub.
-2. On [app.netlify.com](https://app.netlify.com) → **Add new site → Import an existing project** → pick the repo.
-3. Netlify reads `netlify.toml` automatically — **no manual build settings needed**
-   (base `web`, build `npm run build`, Next.js plugin, Node 22).
-4. Add the env vars above under **Site settings → Environment variables** (set
-   `NEXT_PUBLIC_SITE_URL` to your Netlify URL, and `NEXT_PUBLIC_FORMSPREE_ID` to receive messages).
-5. Deploy. 🎉
+**One-time setup:**
+1. Push this repo to GitHub (branch `main`).
+2. Repo **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+3. Done — the workflow builds & deploys automatically. Site goes live at
+   **`https://srinivas1244.github.io/MY-portfolio`**.
 
-> **Contact form:** uses [Formspree](https://formspree.io) when `NEXT_PUBLIC_FORMSPREE_ID`
-> is set (messages go to your inbox), otherwise it opens the visitor's email client.
-> No backend required, so it also works if you ever switch to a static host.
+The workflow sets `NEXT_PUBLIC_BASE_PATH=/MY-portfolio` (so assets resolve under the
+subpath) and `NEXT_PUBLIC_SITE_URL`. Locally, `npm run dev` / `npm run build` run with
+no base path so everything serves from the root as usual.
 
-### Prefer GitHub Pages?
-GitHub Pages is static-only. You'd add `output: "export"` + `basePath: "/MY-portfolio"`
-to `next.config.ts`, set `images.unoptimized: true`, and deploy `web/out` via GitHub
-Actions. The Formspree/mailto contact form already works without a server. Ask and this
-can be wired up.
+- **Custom domain / `username.github.io` repo?** Remove `NEXT_PUBLIC_BASE_PATH` from the
+  workflow (no subpath needed) and set `NEXT_PUBLIC_SITE_URL` to your domain.
+- **Contact:** the form was replaced by direct contact cards, so **no backend is needed** —
+  perfect for static hosting.
+- The **live GitHub repo strip** is fetched at build time, so it refreshes on each deploy.
+
+### Alternative: Netlify
+A root `netlify.toml` is also present. To use Netlify instead, remove `output: "export"`
+from `next.config.ts` (Netlify runs the full Next.js app), import the repo at
+[app.netlify.com](https://app.netlify.com), and it deploys with no other changes.
 
 ---
 

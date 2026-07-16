@@ -21,7 +21,7 @@ const spaceGrotesk = Space_Grotesk({
   weight: ["400", "500", "600", "700"],
 });
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://perala-srinivasulu.vercel.app";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://srinivas1244.github.io/MY-portfolio";
 const description =
   "Perala Srinivasulu — AI Engineer, Full-Stack Developer & Cloud Enthusiast based in Hyderabad. Building intelligent products with React, Spring Boot, and LLMs like Gemini & Claude.";
 
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: profile.name, url: profile.socials.github }],
   creator: profile.name,
-  alternates: { canonical: "/" },
+  alternates: { canonical: SITE_URL },
   openGraph: {
     type: "website",
     locale: "en_IN",
@@ -54,13 +54,13 @@ export const metadata: Metadata = {
     title: "Perala Srinivasulu — AI Engineer & Full-Stack Developer",
     description,
     siteName: "Perala Srinivasulu",
-    images: [{ url: "/profile.jpg", width: 1200, height: 1200, alt: profile.name }],
+    images: [{ url: `${SITE_URL}/profile.jpg`, width: 1200, height: 1200, alt: profile.name }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Perala Srinivasulu — AI Engineer & Full-Stack Developer",
     description,
-    images: ["/profile.jpg"],
+    images: [`${SITE_URL}/profile.jpg`],
   },
   robots: { index: true, follow: true },
   icons: { icon: "/favicon.ico" },

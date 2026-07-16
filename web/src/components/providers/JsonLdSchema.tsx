@@ -1,6 +1,6 @@
 import { profile } from "@/lib/data";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://perala-srinivasulu.vercel.app";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://srinivas1244.github.io/MY-portfolio";
 
 export function JsonLdSchema() {
   const schema = {

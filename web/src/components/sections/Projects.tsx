@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { ArrowUpRight, ExternalLink, Check, Star, GitBranch } from "lucide-react";
+import { ArrowUpRight, Check, Star, GitBranch } from "lucide-react";
 import { GithubIcon } from "@/components/ui/BrandIcons";
 import { projects, type Project } from "@/lib/data";
 import type { GithubRepo } from "@/lib/github";
@@ -13,6 +13,145 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Magnetic } from "@/components/ui/Magnetic";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
+
+/* ── Custom, description-driven preview mockups (one UI per project) ── */
+
+function Bars({ accent, values }: { accent: string; values: number[] }) {
+  return (
+    <div className="flex h-16 items-end gap-1.5">
+      {values.map((h, k) => (
+        <div
+          key={k}
+          className="flex-1 rounded-t"
+          style={{ height: `${h}%`, background: `${accent}${k % 2 ? "77" : "bb"}` }}
+        />
+      ))}
+    </div>
+  );
+}
+
+/** Renders a small app-UI illustration that reflects what each project does. */
+function ProjectMock({ project }: { project: Project }) {
+  const a = project.accent;
+
+  switch (project.slug) {
+    // AI academic analytics → dashboard with CGPA + subject chart
+    case "student-gap-analyzer":
+      return (
+        <div className="space-y-2.5 text-left">
+          <div className="flex items-center justify-between">
+            <div className="h-2.5 w-20 rounded bg-fg/25" />
+            <span className="rounded px-2 py-0.5 text-[10px] font-bold" style={{ background: `${a}22`, color: a }}>
+              CGPA 8.4
+            </span>
+          </div>
+          <div className="grid grid-cols-3 gap-2">
+            {["Sem 1", "Sem 2", "Sem 3"].map((s) => (
+              <div key={s} className="rounded-lg border border-fg/10 bg-fg/[0.03] p-2">
+                <div className="text-[9px] text-muted">{s}</div>
+                <div className="mt-1.5 h-1.5 rounded-full" style={{ width: "72%", background: a }} />
+              </div>
+            ))}
+          </div>
+          <div className="rounded-lg border border-fg/10 bg-fg/[0.03] p-3">
+            <div className="mb-2 flex items-center justify-between">
+              <div className="h-1.5 w-16 rounded bg-fg/15" />
+              <div className="h-1.5 w-8 rounded" style={{ background: `${a}88` }} />
+            </div>
+            <Bars accent={a} values={[55, 80, 42, 95, 60, 76]} />
+          </div>
+        </div>
+      );
+
+    // Campus events → event list with dates & attendance
+    case "event-management-system":
+      return (
+        <div className="space-y-2 text-left">
+          <div className="flex items-center justify-between">
+            <div className="h-2.5 w-24 rounded bg-fg/25" />
+            <span className="rounded px-2 py-0.5 text-[10px] font-bold" style={{ background: `${a}22`, color: a }}>
+              4 upcoming
+            </span>
+          </div>
+          {["MON", "WED", "FRI"].map((d, idx) => (
+            <div key={d} className="flex items-center gap-2.5 rounded-lg border border-fg/10 bg-fg/[0.03] p-2">
+              <div
+                className="flex h-8 w-8 items-center justify-center rounded text-[8px] font-bold"
+                style={{ background: `${a}22`, color: a }}
+              >
+                {d}
+              </div>
+              <div className="flex-1 space-y-1">
+                <div className="h-1.5 w-3/4 rounded bg-fg/20" />
+                <div className="h-1 w-1/2 rounded bg-fg/10" />
+              </div>
+              <div className="h-1.5 w-10 rounded-full" style={{ background: a, opacity: 0.4 + idx * 0.25 }} />
+            </div>
+          ))}
+        </div>
+      );
+
+    // Skill analytics → readiness ring + skill bars
+    case "skillgap-analysis":
+      return (
+        <div className="flex items-center gap-4 text-left">
+          <div
+            className="relative flex h-20 w-20 shrink-0 items-center justify-center rounded-full"
+            style={{ background: `conic-gradient(${a} 78%, rgba(150,150,180,0.14) 0)` }}
+          >
+            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-ink">
+              <span className="text-sm font-bold" style={{ color: a }}>
+                78%
+              </span>
+            </div>
+          </div>
+          <div className="flex-1 space-y-2.5">
+            {["React", "Node", "Cloud"].map((s, i) => (
+              <div key={s}>
+                <div className="mb-1 h-1.5 w-12 rounded bg-fg/15" />
+                <div className="h-1.5 w-full rounded-full bg-fg/10">
+                  <div className="h-full rounded-full" style={{ width: `${58 + i * 13}%`, background: a }} />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+
+    // AI agent → chat-with-your-repo interface
+    case "ai-repo-agent":
+      return (
+        <div className="space-y-2 text-left">
+          <div className="ml-auto max-w-[70%] rounded-2xl rounded-tr-sm bg-fg/10 p-2">
+            <div className="h-1.5 w-full rounded bg-fg/25" />
+          </div>
+          <div
+            className="max-w-[85%] space-y-1.5 rounded-2xl rounded-tl-sm p-2.5"
+            style={{ background: `${a}18`, border: `1px solid ${a}33` }}
+          >
+            <div className="h-1.5 w-full rounded" style={{ background: `${a}aa` }} />
+            <div className="h-1.5 w-4/5 rounded bg-fg/20" />
+            <div className="h-1.5 w-2/3 rounded bg-fg/15" />
+          </div>
+          <div className="mt-1 flex items-center gap-2 rounded-full border border-fg/10 bg-fg/[0.03] px-3 py-2">
+            <div className="h-1.5 flex-1 rounded bg-fg/10" />
+            <span className="h-5 w-5 shrink-0 rounded-full" style={{ background: a }} />
+          </div>
+        </div>
+      );
+
+    // Fallback → generic dashboard
+    default:
+      return (
+        <div className="space-y-2.5 text-left">
+          <div className="h-2.5 w-24 rounded bg-fg/25" />
+          <div className="rounded-lg border border-fg/10 bg-fg/[0.03] p-3">
+            <Bars accent={a} values={[50, 75, 45, 90, 65]} />
+          </div>
+        </div>
+      );
+  }
+}
 
 function ProjectPanel({ project, index }: { project: Project; index: number }) {
   return (
@@ -78,55 +217,27 @@ function ProjectPanel({ project, index }: { project: Project; index: number }) {
                 <GithubIcon className="h-4 w-4" /> Source
               </a>
             </Magnetic>
-            {project.live && (
-              <Magnetic className="inline-block">
-                <a
-                  href={project.live}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full glass px-4 py-2 text-sm font-medium"
-                >
-                  <ExternalLink className="h-4 w-4" /> Live Demo
-                </a>
-              </Magnetic>
-            )}
           </div>
         </div>
 
-        {/* Abstract preview */}
-        <div className="relative min-h-[280px] overflow-hidden border-t border-line md:border-l md:border-t-0">
+        {/* Preview mock — a UI illustration tailored to what the project does */}
+        <div className="relative flex min-h-[280px] items-center justify-center overflow-hidden border-t border-line p-6 sm:p-8 md:border-l md:border-t-0">
           <div
             className="absolute inset-0 opacity-70"
             style={{
               background: `radial-gradient(120% 90% at 80% 10%, ${project.accent}40, transparent 55%), radial-gradient(90% 80% at 10% 100%, ${project.accent}22, transparent 60%)`,
             }}
           />
-          <div className="relative flex h-full items-center justify-center p-8">
-            <div className="w-full max-w-sm rotate-1 rounded-2xl border border-fg/10 bg-ink/70 p-4 shadow-2xl backdrop-blur-md">
-              <div className="flex gap-1.5">
-                <span className="h-2.5 w-2.5 rounded-full bg-fg/20" />
-                <span className="h-2.5 w-2.5 rounded-full bg-fg/20" />
-                <span className="h-2.5 w-2.5 rounded-full bg-fg/20" />
-              </div>
-              <div className="mt-4 space-y-2.5">
-                <div className="h-2 w-1/3 rounded-full" style={{ background: project.accent }} />
-                <div className="h-2 w-full rounded-full bg-fg/10" />
-                <div className="h-2 w-5/6 rounded-full bg-fg/10" />
-                <div className="grid grid-cols-3 gap-2 pt-2">
-                  {[0, 1, 2].map((k) => (
-                    <div key={k} className="h-12 rounded-lg border border-fg/10 bg-fg/[0.04]" />
-                  ))}
-                </div>
-                <div className="flex items-end gap-1.5 pt-2">
-                  {[40, 70, 35, 90, 55, 75].map((h, k) => (
-                    <div
-                      key={k}
-                      className="flex-1 rounded-t"
-                      style={{ height: h, background: `${project.accent}${k % 2 ? "66" : "aa"}` }}
-                    />
-                  ))}
-                </div>
-              </div>
+          <div className="relative w-full max-w-sm overflow-hidden rounded-2xl border border-fg/10 bg-ink/70 shadow-2xl backdrop-blur-md">
+            {/* faux browser bar */}
+            <div className="flex items-center gap-1.5 border-b border-fg/10 bg-ink/60 px-3 py-2">
+              <span className="h-2.5 w-2.5 rounded-full bg-fg/20" />
+              <span className="h-2.5 w-2.5 rounded-full bg-fg/20" />
+              <span className="h-2.5 w-2.5 rounded-full bg-fg/20" />
+              <span className="ml-2 truncate font-mono text-[10px] text-muted">{project.slug}</span>
+            </div>
+            <div className="p-4">
+              <ProjectMock project={project} />
             </div>
           </div>
         </div>

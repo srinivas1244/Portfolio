@@ -1,6 +1,5 @@
 import { getGithubRepos } from "@/lib/github";
 import { Hero } from "@/components/sections/Hero";
-import { TechMarquee } from "@/components/sections/TechMarquee";
 import { About } from "@/components/sections/About";
 import { TechStack } from "@/components/sections/TechStack";
 import { Projects } from "@/components/sections/Projects";
@@ -14,7 +13,6 @@ export default async function Home() {
   return (
     <>
       <Hero />
-      <TechMarquee />
       <About />
       <TechStack />
       <Projects repos={repos} />

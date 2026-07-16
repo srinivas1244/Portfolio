@@ -218,6 +218,7 @@ export type Project = {
   features: string[];
   tech: string[];
   accent: string; // hex used for ambient glow
+  image?: string; // optional local screenshot (e.g. /projects/foo.png); falls back to the GitHub OG card
   github: string;
   live?: string;
   flagship?: boolean;
